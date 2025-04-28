@@ -4,10 +4,27 @@ namespace LibraryPlusAssignment
 {
     internal class Program
     {
-
-
+        
         public static void StaffMenu()
         {
+
+
+            //Hashtable hashtable = new Hashtable();
+            Movie movie1 = new Movie("Mamma Mia", "Comedy", "PG", "1:30:00", 3);
+            Movie movie2 = new Movie("Pride and Prejudice", "Romance", "PG", "1:45:00", 2);
+            MovieCollection movie = new MovieCollection();
+            movie.Insert(movie1.Title, movie1);
+            movie.Insert(movie2.Title, movie2);
+            int result = movie.Search(movie1.Title);
+            Movie resultMovie = movie.Collection(result);
+            Console.WriteLine(resultMovie.Title);
+            Console.WriteLine("Result from movie search" + result);
+
+            int result2 = movie.Search(movie2.Title);
+            Movie resultMovie2 = movie.Collection(result2);
+            Console.WriteLine(resultMovie2.Title);
+            Console.WriteLine("Result from movie search" + result2);
+
             Console.WriteLine("Staff Menu");
             Console.WriteLine("---------------------------------------");
             Console.WriteLine("1. Add DVDs to system");
@@ -21,6 +38,8 @@ namespace LibraryPlusAssignment
             Console.WriteLine("Enter your choice --->");
 
         }
+
+
 
         public static void MemberMenu()
         {
