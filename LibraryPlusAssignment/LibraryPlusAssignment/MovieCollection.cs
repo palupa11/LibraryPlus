@@ -8,28 +8,15 @@ namespace LibraryPlusAssignment
 {
     internal class MovieCollection
     {
-        private Movie [] collection = new Movie[1000];
+        private Movie [] collection;
         private int movieTitle;
 
-        //Properties 
-
-        public Movie Collection(int index)
-        {
-            return collection[index];
-        }
         public int MovieTitle { get { return movieTitle; }  set { movieTitle = value; } }
-
-
-        // We need a key, table (array)
-
-        //Methods
-        //
-
-        //public void Insert(int key)
-        //{
-
-
-        //}
+        //Constructor
+        public MovieCollection()
+        {
+            collection = new Movie[1000];
+        }
 
         public void Insert(string movieTitle, Movie movie)
         {
@@ -53,13 +40,16 @@ namespace LibraryPlusAssignment
                 sum = sum + (int)c;
             }
             int index = DivisionHashing(sum);
+
+
             Movie movie = collection[index];
-            if (movie.Title != movieTitle)
+            //Check if the movie is null
+            if (movie == null)
             {
                 return -1;
-
             }
-            else if(movie == null)
+            //Check if the movie title matches
+            if (movie.Title != movieTitle)
             {
                 return -1;
             }
@@ -67,7 +57,7 @@ namespace LibraryPlusAssignment
 
         }
 
-
+        
 
         public int DivisionHashing(int sum)
         {
@@ -78,8 +68,6 @@ namespace LibraryPlusAssignment
             return modulus;
 
         }
-
-        //Insert, search, delete
 
 
 
