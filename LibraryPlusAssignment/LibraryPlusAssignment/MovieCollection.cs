@@ -20,17 +20,6 @@ namespace LibraryPlusAssignment
         public int MovieTitle { get { return movieTitle; }  set { movieTitle = value; } }
 
 
-        // We need a key, table (array)
-
-        //Methods
-        //
-
-        //public void Insert(int key)
-        //{
-
-
-        //}
-
         public void Insert(string movieTitle, Movie movie)
         {
             int sum = 0;

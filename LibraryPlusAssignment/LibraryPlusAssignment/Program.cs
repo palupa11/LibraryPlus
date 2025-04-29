@@ -7,8 +7,10 @@ namespace LibraryPlusAssignment
         
         public static void StaffMenu()
         {
-
-
+            MovieCollection firstCollection = new MovieCollection();
+            Staff pauli = new Staff();
+            pauli.AddMovie(firstCollection);
+            
             //Hashtable hashtable = new Hashtable();
             Movie movie1 = new Movie("Mamma Mia", "Comedy", "PG", "1:30:00", 3);
             Movie movie2 = new Movie("Pride and Prejudice", "Romance", "PG", "1:45:00", 2);
