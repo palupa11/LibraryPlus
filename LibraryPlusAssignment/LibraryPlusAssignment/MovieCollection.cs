@@ -8,17 +8,16 @@ namespace LibraryPlusAssignment
 {
     internal class MovieCollection
     {
-        private Movie [] collection = new Movie[1000];
+        private Movie [] collection;
         private int movieTitle;
+        public static int collectionSize = 0;
 
-        //Properties 
-
-        public Movie Collection(int index)
-        {
-            return collection[index];
-        }
         public int MovieTitle { get { return movieTitle; }  set { movieTitle = value; } }
-
+        //Constructor
+        public MovieCollection()
+        {
+            collection = new Movie[1000];
+        }
 
         public void Insert(string movieTitle, Movie movie)
         {
@@ -30,11 +29,24 @@ namespace LibraryPlusAssignment
 
             int index = DivisionHashing(sum);
             collection[index] = movie;
+            for (int i = 0; i < collection.Length; i++)
+            {
+                if (collection[i] == null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("This is the movie title" + collection[i].Title);
+                 
+                }
+            }
+            collectionSize++;   
 
 
         }
 
-        public int Search(string movieTitle)
+        public Movie? Search(string movieTitle)
         {
             int sum = 0;
             foreach (char c in movieTitle)
@@ -42,22 +54,28 @@ namespace LibraryPlusAssignment
                 sum = sum + (int)c;
             }
             int index = DivisionHashing(sum);
+
+
             Movie movie = collection[index];
+            //Check if the movie is null
+            if (movie == null)
+            {
+                return null;
+            }
+            //Check if the movie title matches
             if (movie.Title != movieTitle)
             {
-                return -1;
-
+                return null;
             }
-            else if(movie == null)
-            {
-                return -1;
-            }
-            return index;
+            return movie;
 
         }
 
-
-
+        
+        //public static Movie GetMovie(int index)
+        //{
+        //    return collection[index];
+        //}
         public int DivisionHashing(int sum)
         {
             int M = 101;
@@ -67,8 +85,6 @@ namespace LibraryPlusAssignment
             return modulus;
 
         }
-
-        //Insert, search, delete
 
 
 

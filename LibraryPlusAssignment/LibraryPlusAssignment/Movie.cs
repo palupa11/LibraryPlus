@@ -10,22 +10,11 @@ namespace LibraryPlusAssignment
     internal class Movie
     {
         //Data fields
-        private string title;
-        private string genre;
-        private string classification;
-        private string duration;
-        private int copies;
-        
-
-        //Properties
-        public string Title { get { return title; } set { title = value; } }
-        public string Genre { get { return genre; } set { genre = value; } }
-
-        public string Classification { get { return classification; } set { classification = value; } }
-
-        public string Duration { get { return duration; } set { duration = value; } }
-
-        public int Copies { get { return copies; } set { copies = value; } }
+        public string Title { get; set; }
+        public string Genre { get; set; }
+        public string Classification { get; set; }
+        public string Duration { get; set; }
+        public int Copies { get; set; }
 
        public Movie(string title, string genre, string classification, string duration, int copies)
         {
