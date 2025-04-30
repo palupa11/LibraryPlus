@@ -8,18 +8,31 @@ namespace LibraryPlusAssignment
 {
     internal class MovieCollection
     {
-        private Movie [] collection;
-        private int movieTitle;
 
-        public int MovieTitle { get { return movieTitle; }  set { movieTitle = value; } }
-        //Constructor
-        public MovieCollection()
+        private static MovieCollection? instance; // singleton instance declaration
+        private Movie [] collection;
+        public int Movietitle { get; set; }
+        //private Constructor to prevent instantiation from outside the class
+        private MovieCollection()
         {
             collection = new Movie[1000];
         }
 
-        public void Insert(string movieTitle, Movie movie)
+        public static MovieCollection GetInstance()
         {
+            if (instance == null)
+            {
+                instance = new MovieCollection();
+            }
+            return instance;
+        }
+
+        public void Insert(string movieTitle, Movie movie)
+        {   
+            if(movie == null) {
+                Console.WriteLine("Movie is null");
+                return;
+            }
             int sum = 0;
             foreach (char c in movieTitle)
             {
@@ -28,11 +41,10 @@ namespace LibraryPlusAssignment
 
             int index = DivisionHashing(sum);
             collection[index] = movie;
-
-
+            Console.WriteLine(collection[index]);
         }
 
-        public int Search(string movieTitle)
+        public Movie? Search(string movieTitle)
         {
             int sum = 0;
             foreach (char c in movieTitle)
@@ -46,25 +58,24 @@ namespace LibraryPlusAssignment
             //Check if the movie is null
             if (movie == null)
             {
-                return -1;
+                return null;
             }
             //Check if the movie title matches
             if (movie.Title != movieTitle)
             {
-                return -1;
+                return null;
             }
-            return index;
+            return movie;
 
         }
 
         
-
         public int DivisionHashing(int sum)
         {
             int M = 101;
             int modulus = sum % M;
-            Console.WriteLine("This is the sum" + sum);
-            Console.WriteLine("This is mod" + modulus);
+            // Console.WriteLine("This is the sum" + sum);
+            // Console.WriteLine("This is mod" + modulus);
             return modulus;
 
         }

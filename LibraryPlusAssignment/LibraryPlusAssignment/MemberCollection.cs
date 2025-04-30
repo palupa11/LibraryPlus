@@ -9,12 +9,43 @@ namespace LibraryPlusAssignment
 {
     internal class MemberCollection
     {
-        //Data fields
-        private List<Member> collection = new List<Member>();
+        // Singleton instance
+        private static MemberCollection? instance;
+        // private static readonly object lockObj = new object(); // Lock for thread safety
 
-        public void addMember(Member member)
+        // Data fields
+        private List<Member> collection;
+
+        // Private constructor to prevent instantiation
+        private MemberCollection() { 
+            collection = new List<Member>();
+        }
+
+        // Public method to get the singleton instance
+        public static MemberCollection GetInstance()
+        {
+            if (instance == null)
+            {
+     
+                if (instance == null)
+                {
+                    instance = new MemberCollection();
+                }
+            }
+            
+            return instance;
+        }
+
+        // Method to add a member
+        public void AddMember(Member member)
         {
             collection.Add(member);
+        }
+
+        // Optional: Method to retrieve all members
+        public List<Member> GetAllMembers()
+        {
+            return collection;
         }
     }
 }
