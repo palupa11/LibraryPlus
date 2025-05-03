@@ -13,6 +13,7 @@ namespace LibraryPlusAssignment
         private Movie[] collection;
         private string[] keys;
         public int Movietitle { get; set; }
+        private int KeyIndex = 0;
         //private Constructor to prevent instantiation from outside the class
         private MovieCollection()
         {
@@ -43,7 +44,8 @@ namespace LibraryPlusAssignment
 
             int index = DivisionHashing(sum);
             collection[index] = movie;
-            keys[index] = movieTitle;
+            keys[KeyIndex] = movieTitle;
+            KeyIndex++;
             Console.WriteLine(collection[index]);
         }
 
@@ -81,20 +83,25 @@ namespace LibraryPlusAssignment
             }
             int index = DivisionHashing(sum);
             collection[index] = null;
-            keys[index] = null;
+            keys[KeyIndex] = null;
+            KeyIndex--;
 
             
         }
 
-        public void DisplayAllKeys()
+        public void DisplayMovieInfo()
         {
-            for (int i = 0; i < keys.Length; i++)
+            for (int i = 0; i < KeyIndex; i++)
             {
                 if (keys[i] != null)
                 {
-                    Console.WriteLine("Key: " + keys[i]);
+                    Console.WriteLine("Title: " + keys[i]);
                 }
             }
+            Console.WriteLine("===================================================================================");
+            Console.WriteLine("Total number of movies in the system: ", Convert.ToString(KeyIndex + 1));
+            int milliseconds = 3000;
+            Thread.Sleep(milliseconds);
         }
 
         

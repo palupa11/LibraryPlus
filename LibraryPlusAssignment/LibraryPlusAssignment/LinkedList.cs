@@ -11,6 +11,23 @@ namespace LibraryPlusAssignment
         private Node<T> tail;
         private int count;    // To know the number of elements in the list
 
+        //Properties
+        public Node<T> Head
+        {
+            get { return head; }
+            set { head = value; }
+        }
+        public Node<T> Tail
+        {
+            get { return tail; }
+            set { tail = value; }
+        }
+        public int Count
+        {
+            get { return count; }
+            set { count = value; }
+        }
+
 
         //Methods
 
@@ -64,26 +81,27 @@ namespace LibraryPlusAssignment
 
         }
 
-        public void SearchMember(T member)
+        public bool SearchMember(T member)
         {
             Node<T> current = head; //Starting from beginning/head of  list
             for (int i = 0; i < count; i++)
             {
                 if (current.Data.Equals(member)) //If the current node's member is equal to the searched member
                 {
-                    Console.WriteLine("Member found at index: " + i);
+                    return true; //Return the index of the member
                     break; //Exit the loop if the member is found
                 }
                 else
                 {
-                    Console.WriteLine("Member not found at index: " + i);
                     current = current.Next; //Move to the next node
                 }
 
             }
-
+            return false; //Return -1 if the member is not found
 
         }
+
+    
 
     }
 }

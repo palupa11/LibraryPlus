@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,11 +13,11 @@ namespace LibraryPlusAssignment
         // private static readonly object lockObj = new object(); // Lock for thread safety
 
         // Data fields
-        private List<Member> collection;
+        private LinkedList<Member> collection;
 
         // Private constructor to prevent instantiation
         private MemberCollection() { 
-            collection = new List<Member>();
+            collection = new LinkedList<Member>();
         }
 
         // Public method to get the singleton instance
@@ -39,13 +38,60 @@ namespace LibraryPlusAssignment
         // Method to add a member
         public void AddMember(Member member)
         {
-            collection.Add(member);
+            while (collection.Head != null) //While there are nodes in the list
+            {
+                if (collection.Head.Data.GetFullName() == member.GetFullName())//If the current node's member is equal to the searched member
+                {
+                   Console.WriteLine("Member already exists" + member.GetFullName());
+                    return; //Exit the method
+                }
+                else
+                {
+                    collection.Head = collection.Head.Next; //Move to the next node
+                }
+                
+            }
+            // If the member does not exist, add it to the collection
+            collection.InsertAtBeginning(member);
+            collection.PrintList();
+  
         }
 
-        // Optional: Method to retrieve all members
-        public List<Member> GetAllMembers()
+        public void SearchPhoneNumber(string fullName)
         {
-            return collection;
+            while (collection.Head != null) //While there are nodes in the list
+            {
+                if (collection.Head.Data.GetFullName() == fullName)//If the current node's member is equal to the searched member
+                {
+                    string phoneNumber = collection.Head.Data.PhoneNumber;
+                    Console.WriteLine("Member" + " " + fullName + "has phone number" + " "  + phoneNumber);
+                    return; //Exit the method
+                }
+                else
+                {
+                    collection.Head = collection.Head.Next; //Move to the next node
+                }
+                
+            }
+
+            // If the member does not exist, return null
+            Console.WriteLine("Member not found");
+            
+
+
         }
+
+
+
+
+
+
+        // Method to search for a member by name
+
+        // // Optional: Method to retrieve all members
+        // public List<Member> GetAllMembers()
+        // {
+        //     return collection;
+        // }
     }
 }

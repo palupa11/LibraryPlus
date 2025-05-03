@@ -87,6 +87,8 @@ namespace LibraryPlusAssignment
             }
             movieCollection.Insert(title, movie);
             Console.WriteLine("Movie added to system");
+            int milliseconds = 2000;
+            Thread.Sleep(milliseconds);
         }
 
         public void RemoveMovie(string title, int copiesToRemove)
@@ -96,17 +98,25 @@ namespace LibraryPlusAssignment
             Console.WriteLine("Movie found with " + movie.Copies + " copies");
             if(movie.Copies >= copiesToRemove)
             {
-                Console.WriteLine("HEREEE");
                 movie.Copies -= copiesToRemove;
                 if (movie.Copies == 0)
                 {
                     movieCollection.Delete(title);
                     Console.WriteLine("Movie removed from system");
+                    int milliseconds = 3000;
+                    Thread.Sleep(milliseconds);
                 }
                 else
                 {
                     Console.WriteLine("Copies updated to " + movie.Copies);
+                    int milliseconds = 3000;
+                    Thread.Sleep(milliseconds);
                 }
+                return;
+            }else {
+                Console.WriteLine("Not enough copies to remove");
+                int milliseconds = 3000;
+                Thread.Sleep(milliseconds);
                 return;
             }
             
@@ -117,6 +127,16 @@ namespace LibraryPlusAssignment
             MemberCollection memberCollection = MemberCollection.GetInstance();
             memberCollection.AddMember(member);
             Console.WriteLine("Member added to system");
+            int milliseconds = 3000;
+            Thread.Sleep(milliseconds);
+        }
+
+        public void GetMemberPhoneNumber(string fullName)
+        {
+            MemberCollection memberCollection = MemberCollection.GetInstance();
+            memberCollection.SearchPhoneNumber(fullName);
+            int milliseconds = 3000;
+            Thread.Sleep(milliseconds);
         }
     }
 }
