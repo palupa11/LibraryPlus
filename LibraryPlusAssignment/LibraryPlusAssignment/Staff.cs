@@ -89,7 +89,28 @@ namespace LibraryPlusAssignment
             Console.WriteLine("Movie added to system");
         }
 
-
+        public void RemoveMovie(string title, int copiesToRemove)
+        {
+            MovieCollection movieCollection = MovieCollection.GetInstance();
+            Movie movie = movieCollection.Search(title);
+            Console.WriteLine("Movie found with " + movie.Copies + " copies");
+            if(movie.Copies >= copiesToRemove)
+            {
+                Console.WriteLine("HEREEE");
+                movie.Copies -= copiesToRemove;
+                if (movie.Copies == 0)
+                {
+                    movieCollection.Delete(title);
+                    Console.WriteLine("Movie removed from system");
+                }
+                else
+                {
+                    Console.WriteLine("Copies updated to " + movie.Copies);
+                }
+                return;
+            }
+            
+        }
         public void AddMember(string firstName, string lastName, string phoneNumber, string password)
         {
             Member member = new Member(firstName, lastName, phoneNumber, password);

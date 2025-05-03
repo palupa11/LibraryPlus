@@ -42,7 +42,17 @@ namespace LibraryPlusAssignment
                 }else if (choice == "1"){
                     Console.Clear();
                     staff.AddMovie();
+                }else if (choice == "2"){
+                    Console.Clear();
+                    Console.WriteLine("Enter the title of the movie you want to remove:");
+                    string title = Console.ReadLine();
+                    Console.WriteLine("Enter the number of copies you want to remove:");
+                    int copies = Convert.ToInt32(Console.ReadLine()); 
+
+                    staff.RemoveMovie(title, copies);
                 }
+                    
+                    
 
             }
                     

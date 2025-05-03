@@ -72,6 +72,20 @@ namespace LibraryPlusAssignment
 
         }
 
+        public void Delete(string movieTitle)
+        {
+            int sum = 0;
+            foreach (char c in movieTitle)
+            {
+                sum = sum + (int)c;
+            }
+            int index = DivisionHashing(sum);
+            collection[index] = null;
+            keys[index] = null;
+
+            
+        }
+
         public void DisplayAllKeys()
         {
             for (int i = 0; i < keys.Length; i++)
