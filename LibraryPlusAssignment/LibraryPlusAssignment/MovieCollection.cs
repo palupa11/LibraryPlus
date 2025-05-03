@@ -10,12 +10,14 @@ namespace LibraryPlusAssignment
     {
 
         private static MovieCollection? instance; // singleton instance declaration
-        private Movie [] collection;
+        private Movie[] collection;
+        private string[] keys;
         public int Movietitle { get; set; }
         //private Constructor to prevent instantiation from outside the class
         private MovieCollection()
         {
             collection = new Movie[1000];
+            keys = new string[1000];
         }
 
         public static MovieCollection GetInstance()
@@ -41,6 +43,7 @@ namespace LibraryPlusAssignment
 
             int index = DivisionHashing(sum);
             collection[index] = movie;
+            keys[index] = movieTitle;
             Console.WriteLine(collection[index]);
         }
 
@@ -67,6 +70,17 @@ namespace LibraryPlusAssignment
             }
             return movie;
 
+        }
+
+        public void DisplayAllKeys()
+        {
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i] != null)
+                {
+                    Console.WriteLine("Key: " + keys[i]);
+                }
+            }
         }
 
         
