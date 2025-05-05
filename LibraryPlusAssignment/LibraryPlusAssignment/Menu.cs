@@ -78,7 +78,10 @@ namespace LibraryPlusAssignment
                 else if (choice == "4")
                 {
                     Console.Clear();
-                    Console.WriteLine("Paulis homework ");
+                    Console.WriteLine("Remove a registered member from the system ");
+                    Console.Write("Enter the member's full name: ");
+                    string? fullName = Console.ReadLine();
+                    staff.RemoveMember(fullName);
                 }
                 else if (choice == "5")
                 {

@@ -81,23 +81,62 @@ namespace LibraryPlusAssignment
 
         }
 
-        public bool SearchMember(T member)
-        {
-            Node<T> current = head; //Starting from beginning/head of  list
-            for (int i = 0; i < count; i++)
+        //public bool SearchMember(T member)
+        //{
+        //    Node<T> current = head; //Starting from beginning/head of  list
+        //    for (int i = 0; i < count; i++)
+        //    {
+        //        if (current.Data.Equals(member)) //If the current node's member is equal to the searched member
+        //        {
+        //            return true; //Return the index of the member
+        //            break; //Exit the loop if the member is found
+        //        }
+        //        else
+        //        {
+        //            current = current.Next; //Move to the next node
+        //        }
+
+        //    }
+        //    return false; //Return -1 if the member is not found
+
+        //}
+
+        public void Remove(T elementToDelete)
+        { 
+            
+            Node<T> current = head; 
+            Node<T> previous = null; //To keep track of the previous node
+            while(current != null)
             {
-                if (current.Data.Equals(member)) //If the current node's member is equal to the searched member
+                //previous = current; //The previous node is the current node
+                if (current.Data.Equals(elementToDelete))
                 {
-                    return true; //Return the index of the member
-                    break; //Exit the loop if the member is found
+                    if(previous == null) //If the current node is the head
+                    {
+                        head = current.Next; //The head is now the next node
+                    }
+                    else
+                    {
+                        previous.Next = current.Next; //The previous node's next is the current node's next
+                    }
+                    if( current == tail) //If the current node is the tail
+                    {
+                        tail = previous; //The tail is now the previous node
+                    }
+                    count--; //Decrement the count of nodes in the list
+                    return;
+
                 }
                 else
                 {
+                    previous = current; //The previous node is the current node
                     current = current.Next; //Move to the next node
                 }
 
             }
-            return false; //Return -1 if the member is not found
+            Console.WriteLine("Element not found");
+
+
 
         }
 

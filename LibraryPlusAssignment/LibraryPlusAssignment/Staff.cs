@@ -131,6 +131,15 @@ namespace LibraryPlusAssignment
             Thread.Sleep(milliseconds);
         }
 
+        public void RemoveMember(string fullName)
+        {
+            MemberCollection memberCollection = MemberCollection.GetInstance();
+            memberCollection.DeleteMember(fullName);
+            Console.WriteLine("Member removed from system");
+            int milliseconds = 3000;
+            Thread.Sleep(milliseconds);
+        }
+
         public void GetMemberPhoneNumber(string fullName)
         {
             MemberCollection memberCollection = MemberCollection.GetInstance();
