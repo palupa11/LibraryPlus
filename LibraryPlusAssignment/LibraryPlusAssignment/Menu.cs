@@ -78,12 +78,15 @@ namespace LibraryPlusAssignment
                 else if (choice == "4")
                 {
                     Console.Clear();
-                    Console.WriteLine("Paulis homework ");
+                    Console.WriteLine("Remove a registered member from system");
+                    Console.Write("Enter the member's full name: ");
+                    string? fullName = Console.ReadLine();
+                    staff.RemoveMember(fullName);
                 }
                 else if (choice == "5")
                 {
                     Console.Clear();
-                    Console.WriteLine("Find a member contact phone number, given the member's name");
+                    Console.WriteLine("Find a member's contact phone number, given the member's name");
                     Console.Write("Enter the member's full name: ");
                     string? fullName = Console.ReadLine();
                     staff.GetMemberPhoneNumber(fullName);
@@ -95,7 +98,7 @@ namespace LibraryPlusAssignment
 
         }
 
-        public void MemberMenu()
+        public void MemberMenu(Member member)
         {
             while (true)
             {
@@ -103,7 +106,7 @@ namespace LibraryPlusAssignment
                 Console.WriteLine("Member Menu");
                 Console.WriteLine("---------------------------------------");
                 Console.WriteLine("1. Browse all the Movies");
-                Console.WriteLine("2. Return a DVD");
+                Console.WriteLine("2. Display all the information of a movie, given the movie title");
                 Console.WriteLine("3. Find a member contact phone number, given the member's name");
                 Console.WriteLine("4. Find members who are currently renting a particular movie");
                 Console.WriteLine("0. Return to main menu");
@@ -118,6 +121,15 @@ namespace LibraryPlusAssignment
                     Console.Clear();
                     MovieCollection movieCollection = MovieCollection.GetInstance();
                     movieCollection.DisplayMovieInfo();
+                }
+                else if (choice == "2"){
+                    Console.Clear();
+                    Console.Write("Title: ");
+                    string? title = Console.ReadLine();
+                    MovieCollection movieCollection = MovieCollection.GetInstance();
+                    movieCollection.DisplayMovieByTitle(title);
+                    
+                    
                 }
 
             }

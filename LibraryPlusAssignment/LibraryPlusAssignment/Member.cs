@@ -19,14 +19,14 @@ namespace LibraryPlusAssignment
 
         //Constructor
 
-       public Member(string firstName, string lastName, string phoneNumber, string password)
+        public Member(string firstName, string lastName, string phoneNumber, string password)
         {
             FirstName = firstName;
             LastName = lastName;
             PhoneNumber = phoneNumber;
             Password = password;
             rentedMovies = new string[5]; // Initialize the array with a size of 10       
-            
+
         }
         public String GetFullName()
         {
@@ -50,8 +50,8 @@ namespace LibraryPlusAssignment
                 {
                     Console.WriteLine("Movie not found.");
                 }
-                
-                
+
+
                 Console.WriteLine("Movie borrowed successfully.");
             }
             else
@@ -59,5 +59,6 @@ namespace LibraryPlusAssignment
                 Console.WriteLine("You have reached the maximum number of borrowed movies.");
             }
         }
+        
     }
 }

@@ -125,8 +125,26 @@ namespace LibraryPlusAssignment
         {
             Member member = new Member(firstName, lastName, phoneNumber, password);
             MemberCollection memberCollection = MemberCollection.GetInstance();
-            memberCollection.AddMember(member);
+            int milliseconds = 3000;
+            if (memberCollection.SearchMember(member.GetFullName()))
+            {
+                Console.WriteLine("Member already exists");
+                Thread.Sleep(milliseconds);
+                return;
+            }
+
+            memberCollection.Insert(member);
+            memberCollection.PrintList();
             Console.WriteLine("Member added to system");
+            
+            Thread.Sleep(milliseconds);
+        }
+        public void RemoveMember(string fullName)
+        {
+            MemberCollection memberCollection = MemberCollection.GetInstance();
+            memberCollection.Delete(fullName);
+            memberCollection.PrintList();
+            Console.WriteLine("Member removed from system");
             int milliseconds = 3000;
             Thread.Sleep(milliseconds);
         }
