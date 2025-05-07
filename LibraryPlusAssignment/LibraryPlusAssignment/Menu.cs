@@ -107,8 +107,10 @@ namespace LibraryPlusAssignment
                 Console.WriteLine("---------------------------------------");
                 Console.WriteLine("1. Browse all the Movies");
                 Console.WriteLine("2. Display all the information of a movie, given the movie title");
-                Console.WriteLine("3. Find a member contact phone number, given the member's name");
-                Console.WriteLine("4. Find members who are currently renting a particular movie");
+                Console.WriteLine("3. Borrow a movie DVD");
+                Console.WriteLine("4. Return a movie DVD");
+                Console.WriteLine("5. List current borrowed movies");
+                Console.WriteLine("6. Display top 3 movies rented by members");
                 Console.WriteLine("0. Return to main menu");
                 Console.WriteLine("Enter your choice --->");
                 string? choice = Console.ReadLine();
@@ -130,6 +132,21 @@ namespace LibraryPlusAssignment
                     movieCollection.DisplayMovieByTitle(title);
                     
                     
+                }
+                else if (choice == "3"){
+                    Console.Clear();
+                    Console.Write("Enter title to borrow: ");
+                    string title = Console.ReadLine();
+                    member.BorrowMovie(title);
+
+
+                }
+                else if (choice == "4"){
+                    Console.Clear();
+                    Console.Write("Enter title to return: ");
+                    string title = Console.ReadLine();
+                    member.ReturnMovie(title);
+
                 }
 
             }

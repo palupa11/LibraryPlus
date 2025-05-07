@@ -121,6 +121,8 @@ namespace LibraryPlusAssignment
             if (movie == null)
             {
                 Console.WriteLine("Movie not found");
+                 int milliseconds = 3000;
+                 Thread.Sleep(milliseconds);
             }
             else
             {
@@ -129,6 +131,8 @@ namespace LibraryPlusAssignment
                 Console.WriteLine("Classification: " + movie?.Classification);
                 Console.WriteLine("Duration: " + movie?.Duration);
                 Console.WriteLine("Copies: " + movie?.Copies);
+                int milliseconds = 4000;
+                Thread.Sleep(milliseconds);
 
             }
 
