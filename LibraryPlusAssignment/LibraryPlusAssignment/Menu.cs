@@ -147,6 +147,9 @@ namespace LibraryPlusAssignment
                     string title = Console.ReadLine();
                     member.ReturnMovie(title);
 
+                }else if (choice == "5") {
+                    Console.Clear();
+                    member.ListBorrowedMovies();
                 }
 
             }

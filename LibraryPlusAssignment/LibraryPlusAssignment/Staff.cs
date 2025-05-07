@@ -12,8 +12,8 @@ namespace LibraryPlusAssignment
         //Data fields
         public string Username { get; set; }
         public string Password { get; set; }
-        
-    
+
+
         //Constructor
         public Staff(string username, string password)
         {
@@ -21,13 +21,14 @@ namespace LibraryPlusAssignment
             Password = password;
         }
 
-        
+
         public void AddMovie()
-        {   Console.WriteLine("Add DVD to the system");
+        {
+            Console.WriteLine("Add DVD to the system");
             Console.Write("Title: ");
             string title = Console.ReadLine();
             string genre;
-            string [] validGenres = ["drama", "adventure", "family", "action", "sci-fi", "comedy", "animated", "thriller", "other"]; 
+            string[] validGenres = ["drama", "adventure", "family", "action", "sci-fi", "comedy", "animated", "thriller", "other"];
             while (true)
             {
                 Console.WriteLine("The Genres can be drama, adventure, family, action, sci-fi, comedy, animated, thriller, or other");
@@ -42,10 +43,10 @@ namespace LibraryPlusAssignment
                     Console.Write("Invalid genre. Please enter a valid genre: ");
                 }
             }
-            string [] validClassifications = ["G", "PG", "M", "MA", "R", "other"];
+            string[] validClassifications = ["G", "PG", "M", "MA", "R", "other"];
             string classification;
             while (true)
-            {   
+            {
                 Console.WriteLine("The Classification can be G, PG, M, MA, R, or other");
                 Console.Write("Classification: ");
                 classification = Console.ReadLine().ToUpper();
@@ -79,9 +80,9 @@ namespace LibraryPlusAssignment
                 if (existingMovie != null)
                 {
                     existingMovie.Copies = copies;
-                    
+
                 }
-                
+
                 Console.WriteLine("Copies updated");
                 return;
             }
@@ -96,7 +97,7 @@ namespace LibraryPlusAssignment
             MovieCollection movieCollection = MovieCollection.GetInstance();
             Movie movie = movieCollection.Search(title);
             Console.WriteLine("Movie found with " + movie.Copies + " copies");
-            if(movie.Copies >= copiesToRemove)
+            if (movie.Copies >= copiesToRemove)
             {
                 movie.Copies -= copiesToRemove;
                 if (movie.Copies == 0)
@@ -113,20 +114,23 @@ namespace LibraryPlusAssignment
                     Thread.Sleep(milliseconds);
                 }
                 return;
-            }else {
+            }
+            else
+            {
                 Console.WriteLine("Not enough copies to remove");
                 int milliseconds = 3000;
                 Thread.Sleep(milliseconds);
                 return;
             }
-            
+
         }
         public void AddMember(string firstName, string lastName, string phoneNumber, string password)
         {
             Member member = new Member(firstName, lastName, phoneNumber, password);
             MemberCollection memberCollection = MemberCollection.GetInstance();
             int milliseconds = 3000;
-            if (memberCollection.SearchMember(member.GetFullName()))
+            Member existingMember = memberCollection.SearchMember(member.GetFullName());
+            if (existingMember != null)
             {
                 Console.WriteLine("Member already exists");
                 Thread.Sleep(milliseconds);
@@ -136,17 +140,32 @@ namespace LibraryPlusAssignment
             memberCollection.Insert(member);
             memberCollection.PrintList();
             Console.WriteLine("Member added to system");
-            
+
             Thread.Sleep(milliseconds);
         }
         public void RemoveMember(string fullName)
         {
             MemberCollection memberCollection = MemberCollection.GetInstance();
-            memberCollection.Delete(fullName);
-            memberCollection.PrintList();
-            Console.WriteLine("Member removed from system");
-            int milliseconds = 3000;
-            Thread.Sleep(milliseconds);
+            Member member = memberCollection.SearchMember(fullName);
+            if (member != null)
+            {
+                if (member.rentedMovies.Length > 0)
+                {
+                    Console.WriteLine("The member must return the rented DVDs before they can removed");
+                    return;
+                }
+                else
+                {
+                    memberCollection.Delete(fullName);
+                    memberCollection.PrintList();
+                    Console.WriteLine("Member removed from system");
+                    int milliseconds = 3000;
+                    Thread.Sleep(milliseconds);
+                }
+            }else {
+                Console.WriteLine("Member not found");
+            }
+
         }
 
         public void GetMemberPhoneNumber(string fullName)

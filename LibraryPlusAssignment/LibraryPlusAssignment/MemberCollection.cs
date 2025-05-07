@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,19 +57,20 @@ namespace LibraryPlusAssignment
             Head = newNode; // Ensure Head is not null before assignment
 
         }
-        public bool SearchMember(string fullName)
+        public Member SearchMember(string fullName)
         {
             Node<Member> current = Head; // Start from the head of the list
             while (current != null) // While there are nodes in the list
             {
                 if (current.Data.GetFullName() == fullName) // If the current node's member is equal to the searched member
                 {
-                    return true; // Exit the method
+                    return current.Data; // Exit the method
                 }
                 current = current.Next; // Move to the next node
             }
-            return false;
+            return null;
         }
+        
 
         public void Delete(string fullName)
         {

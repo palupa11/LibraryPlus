@@ -80,10 +80,17 @@ namespace LibraryPlusAssignment
                     Thread.Sleep(milliseconds);
                 }
 
-
-
             }
 
+        }
+        public void ListBorrowedMovies(){
+            int milliseconds = 3000;
+            Console.WriteLine("***List of Currently Borrowed movies***");
+            for(int i = 0; i< BorrowedCount; i++){
+                Console.WriteLine(rentedMovies[i]);
+            }
+            Thread.Sleep(milliseconds);
+            
         }
         
     }
