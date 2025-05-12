@@ -19,14 +19,14 @@ namespace LibraryPlusAssignment
 
         //Constructor
 
-       public Member(string firstName, string lastName, string phoneNumber, string password)
+        public Member(string firstName, string lastName, string phoneNumber, string password)
         {
             FirstName = firstName;
             LastName = lastName;
             PhoneNumber = phoneNumber;
             Password = password;
             rentedMovies = new string[5]; // Initialize the array with a size of 10       
-            
+
         }
         public String GetFullName()
         {
@@ -35,6 +35,7 @@ namespace LibraryPlusAssignment
 
         public void BorrowMovie(string movieTitle)
         {
+            int milliseconds = 3000;
             if (BorrowedCount < 5)
             {
                 MovieCollection movieCollection = MovieCollection.GetInstance();
@@ -45,19 +46,52 @@ namespace LibraryPlusAssignment
                     rentedMovies[BorrowedCount] = movieTitle;
                     BorrowedCount++;
                     Console.WriteLine("Movie borrowed successfully.");
+                    Thread.Sleep(milliseconds);
                 }
                 else
                 {
                     Console.WriteLine("Movie not found.");
+                    Thread.Sleep(milliseconds);
                 }
-                
-                
-                Console.WriteLine("Movie borrowed successfully.");
+
             }
             else
             {
                 Console.WriteLine("You have reached the maximum number of borrowed movies.");
+                Thread.Sleep(milliseconds);
             }
         }
+
+        public void ReturnMovie(string movieTitle){
+            int milliseconds = 3000;
+            for(int i = 0; i <= BorrowedCount; i++){
+                if(rentedMovies[i] == movieTitle){
+                    rentedMovies[i] = null;
+                    BorrowedCount--;
+                    MovieCollection movieCollection = MovieCollection.GetInstance();
+                    Movie movie = movieCollection.Search(movieTitle);
+                    movie.Copies++;
+                    Console.WriteLine("Movie returned successfully");
+                    Thread.Sleep(milliseconds);
+                    
+
+                }else{
+                    Console.WriteLine("You are currently not renting that movie");
+                    Thread.Sleep(milliseconds);
+                }
+
+            }
+
+        }
+        public void ListBorrowedMovies(){
+            int milliseconds = 3000;
+            Console.WriteLine("***List of Currently Borrowed movies***");
+            for(int i = 0; i< BorrowedCount; i++){
+                Console.WriteLine(rentedMovies[i]);
+            }
+            Thread.Sleep(milliseconds);
+            
+        }
+        
     }
 }

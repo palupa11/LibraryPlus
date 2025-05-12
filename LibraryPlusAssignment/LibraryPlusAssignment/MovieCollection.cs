@@ -115,6 +115,29 @@ namespace LibraryPlusAssignment
 
         }
 
+        public void DisplayMovieByTitle(string title)
+        {
+            Movie? movie = Search(title);
+            if (movie == null)
+            {
+                Console.WriteLine("Movie not found");
+                 int milliseconds = 3000;
+                 Thread.Sleep(milliseconds);
+            }
+            else
+            {
+                Console.WriteLine("Titles: " + movie?.Title);
+                Console.WriteLine("Genre: " + movie?.Genre);
+                Console.WriteLine("Classification: " + movie?.Classification);
+                Console.WriteLine("Duration: " + movie?.Duration);
+                Console.WriteLine("Copies: " + movie?.Copies);
+                int milliseconds = 4000;
+                Thread.Sleep(milliseconds);
+
+            }
+
+        }
+
 
 
     }

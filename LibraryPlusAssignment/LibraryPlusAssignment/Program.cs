@@ -1,14 +1,15 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections.ObjectModel;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Serialization;
 
 namespace LibraryPlusAssignment
 {
     internal class Program
     {
-        
+
         // public static void StaffMenu()
         // {   
-            
+
         //     if (username == "staff" || password == "today123")
         //     {
         //         Console.WriteLine("Login Successful");
@@ -47,7 +48,7 @@ namespace LibraryPlusAssignment
 
         //         }else if (choice == "2")
         //         {
-                    
+
         //             // Remove DVDs from system
         //         }else if (choice == "3")
         //         {
@@ -63,7 +64,7 @@ namespace LibraryPlusAssignment
 
         //             staff.AddMember(FirstName, LastName, PhoneNumber, newPassword);
         //             Console.WriteLine("Member added to system");
-                    
+
 
         //         }else if (choice == "4")
         //         {
@@ -81,11 +82,11 @@ namespace LibraryPlusAssignment
         //         }
 
         //     }while(Console.ReadLine() != "0");
-                
+
         //     }else {
         //         Console.WriteLine("Invalid username or password");
         //     }
-         
+
 
         // }
 
@@ -102,7 +103,8 @@ namespace LibraryPlusAssignment
                 Menu menu = new Menu();
                 int option = menu.DisplayMenu();
                 if (option == 1)
-                {   Console.Clear();
+                {
+                    Console.Clear();
                     Console.Write("Username: ");
                     string? username = Console.ReadLine();
                     Console.Write("Password: ");
@@ -111,17 +113,38 @@ namespace LibraryPlusAssignment
                     {
                         Console.WriteLine("Invalid username or password field");
                     }
-                    if (username == "staff" && password == "today123") 
+                    if (username == "staff" && password == "today123")
                     {
                         Staff staff = new Staff(username, password);
                         Console.WriteLine("Login Successful");
                         menu.StaffMenu(staff);
                         Console.Clear();
                     }
-           
-                }else if (option == 2)
+
+                }
+                else if (option == 2)
                 {
-                   menu.MemberMenu();
+                    Console.Clear();
+                    Console.Write("Enter first name: ");
+                    string? firstName = Console.ReadLine(); 
+                    Console.Write("Enter last name: ");
+                    string? lastName = Console.ReadLine();
+                    Console.Write("Enter 4 digit password: ");
+                    string? password = Console.ReadLine();
+                    MemberCollection collection = MemberCollection.GetInstance();
+                    Member member = collection.MemberLogIn(firstName, lastName, password);
+                    if(member == null){
+                        Console.Write("Invalid details, try again:");
+                    }
+                    else{
+                         menu.MemberMenu(member);
+
+                    }
+
+
+                   
+
+
 
                 }
                 else if (option == 0)
