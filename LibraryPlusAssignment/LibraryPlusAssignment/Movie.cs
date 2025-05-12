@@ -16,14 +16,18 @@ namespace LibraryPlusAssignment
         public string Duration { get; set; }
         public int Copies { get; set; }
 
-       public Movie(string title, string genre, string classification, string duration, int copies)
+        public int RentCount { get; set; }
+
+        public Movie(string title, string genre, string classification, string duration, int copies)
         {
             Title = title;
             Genre = genre;
             Classification = classification;
             Duration = duration;
             Copies = copies;
-            
+            RentCount = 0;
+
+
         }
     }
 }

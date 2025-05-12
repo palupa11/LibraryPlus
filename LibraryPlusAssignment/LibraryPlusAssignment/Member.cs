@@ -45,6 +45,7 @@ namespace LibraryPlusAssignment
                     movie.Copies--;
                     rentedMovies[BorrowedCount] = movieTitle;
                     BorrowedCount++;
+                    movie.RentCount++;
                     Console.WriteLine("Movie borrowed successfully.");
                     Thread.Sleep(milliseconds);
                 }

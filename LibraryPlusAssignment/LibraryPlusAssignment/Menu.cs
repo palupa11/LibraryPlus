@@ -124,16 +124,18 @@ namespace LibraryPlusAssignment
                     MovieCollection movieCollection = MovieCollection.GetInstance();
                     movieCollection.DisplayMovieInfo();
                 }
-                else if (choice == "2"){
+                else if (choice == "2")
+                {
                     Console.Clear();
                     Console.Write("Title: ");
                     string? title = Console.ReadLine();
                     MovieCollection movieCollection = MovieCollection.GetInstance();
                     movieCollection.DisplayMovieByTitle(title);
-                    
-                    
+
+
                 }
-                else if (choice == "3"){
+                else if (choice == "3")
+                {
                     Console.Clear();
                     Console.Write("Enter title to borrow: ");
                     string title = Console.ReadLine();
@@ -141,15 +143,27 @@ namespace LibraryPlusAssignment
 
 
                 }
-                else if (choice == "4"){
+                else if (choice == "4")
+                {
                     Console.Clear();
                     Console.Write("Enter title to return: ");
                     string title = Console.ReadLine();
                     member.ReturnMovie(title);
 
-                }else if (choice == "5") {
+                }
+                else if (choice == "5")
+                {
                     Console.Clear();
                     member.ListBorrowedMovies();
+
+                }
+                else if (choice == "6")
+                {
+                    Console.Clear();
+                    MovieCollection collection = MovieCollection.GetInstance();
+                    collection.DisplayTop3Movies(collection);
+
+
                 }
 
             }

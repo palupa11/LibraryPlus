@@ -167,31 +167,31 @@ namespace LibraryPlusAssignment
             return null;
         }
 
-        public void DeleteMember(string fullName) 
-        {
-            Node<Member> current = collection.Head; // Start from the head of the list
-            while (current != null) //While there are nodes in the list
-            {
-                Console.WriteLine("inside the deletemember function of member collection , searching for" + current.Data.GetFullName());
-                if (current.Data.GetFullName() == fullName)//If the current node's member is equal to the searched member
-                {
-                    collection.Remove(current.Data); //Remove the member from the list
-                    Console.WriteLine("Member" + " " + fullName + " " + "has been removed from collection");
-                    collection.PrintList();
-                    return; //Exit the method
-                }
+        //public void DeleteMember(string fullName) 
+        //{
+        //    Node<Member> current = collection.Head; // Start from the head of the list
+        //    while (current != null) //While there are nodes in the list
+        //    {
+        //        Console.WriteLine("inside the deletemember function of member collection , searching for" + current.Data.GetFullName());
+        //        if (current.Data.GetFullName() == fullName)//If the current node's member is equal to the searched member
+        //        {
+        //            collection.Remove(current.Data); //Remove the member from the list
+        //            Console.WriteLine("Member" + " " + fullName + " " + "has been removed from collection");
+        //            collection.PrintList();
+        //            return; //Exit the method
+        //        }
                 
-                 current = current.Next; //Move to the next node
+        //         current = current.Next; //Move to the next node
                 
 
-            }
+        //    }
 
-            // If the member does not exist, return null
-            Console.WriteLine("Member not found");
+        //    // If the member does not exist, return null
+        //    Console.WriteLine("Member not found");
 
 
 
-        }
+        //}
 
 
 

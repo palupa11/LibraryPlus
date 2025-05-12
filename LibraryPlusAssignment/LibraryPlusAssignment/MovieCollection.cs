@@ -138,6 +138,23 @@ namespace LibraryPlusAssignment
 
         }
 
+        public void DisplayTop3Movies(MovieCollection collection)
+        {
+            for (int i = 0; i < KeyIndex; i++)
+            {
+                if (keys[i] != null)
+                {
+                    Movie? movie = Search(keys[i]);
+                    if (movie == null)
+                    {
+                        Console.WriteLine("Movie title: " + movie.Title + " and rent count " + movie.RentCount);
+                        int milliseconds = 4000;
+                        Thread.Sleep(milliseconds);
+                    }
+                }
+            }
+        }
+
 
 
     }
