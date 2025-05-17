@@ -167,7 +167,27 @@ namespace LibraryPlusAssignment
             return null;
         }
 
-
+        public void SearchMemberByRentedMovies(string title)
+        {
+            Console.WriteLine("Entering Search member by movie");
+            Node<Member> current = Head;// Start from the head of the list
+            string[] renters = new string[100];
+            int j = 0;
+            while (current != null) // While there are nodes in the list
+            {
+                //Console.WriteLine(current.Data.FirstName);
+                for (int i = 0; i < current.Data.BorrowedCount; i++)
+                {
+                    if (current.Data.rentedMovies[i] == title)
+                    {
+                        Console.WriteLine(current.Data.GetFullName());
+                    }
+                }
+                current = current.Next; // Move to the next node
+            }
+            Console.ReadKey();
+            return;
+        }
 
 
 

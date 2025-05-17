@@ -92,6 +92,15 @@ namespace LibraryPlusAssignment
                     staff.GetMemberPhoneNumber(fullName);
 
                 }
+                else if (choice == "6") { 
+                   Console.Write("Enter movie title: ");
+                   string? title = Console.ReadLine();
+                   MemberCollection collection = MemberCollection.GetInstance();
+                   collection.SearchMemberByRentedMovies(title);
+                   Console.ReadKey();
+
+
+                }
 
 
             }
