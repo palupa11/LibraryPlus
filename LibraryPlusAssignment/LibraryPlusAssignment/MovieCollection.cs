@@ -220,27 +220,42 @@ namespace LibraryPlusAssignment
 
         }
 
-        public void DisplayTopThree()
+        public void DisplayTopThree(Movie[] collection)
         {
-            string[] sortedKeys = new string[KeyIndex]; //the size of the actual movies we have added to the array
-            Array.Copy(keys, 0, sortedKeys, 0, KeyIndex);
-            MergeSort(sortedKeys, 0, sortedKeys.Length - 1);
+            //string[] sortedKeys = new string[KeyIndex]; //the size of the actual movies we have added to the array
+            //Array.Copy(keys, 0, sortedKeys, 0, KeyIndex);
+            //MergeSort(sortedKeys, 0, sortedKeys.Length - 1);
 
-            for (int i = 0;  i < sortedKeys.Length; i++)
+            //for (int i = 0;  i < sortedKeys.Length; i++)
+            //{
+            //    Movie movie = Search(sortedKeys[i]);
+            //    Console.WriteLine(movie.Title); 
+            //    Console.WriteLine(movie.RentCount); 
+            //}
+            //int milliseconds = 4000;
+            //Thread.Sleep(milliseconds);
+            
+            Movie[] movieArray = new Movie[KeyIndex];
+            int index = 0;
+            for( int i = 0; i < collection.Length; i++)
             {
-                Movie movie = Search(sortedKeys[i]);
-                Console.WriteLine(movie.Title); 
-                Console.WriteLine(movie.RentCount); 
+               
+                if (collection[i] != null)
+                {
+                    movieArray[index++] = collection[i];
+                }
+
             }
-            int milliseconds = 4000;
-            Thread.Sleep(milliseconds);
+
+            MergeSort(movieArray, 0, movieArray.Length - 1);
 
 
         }
 
 
+
         //j = keys.Length();
-        public void MergeSort(string[] keys, int i, int j)
+        public void MergeSort(Movie[] movieArray, int i, int j)
         {
             //int i = 0; 
             //int j = keys.Length;
@@ -252,9 +267,9 @@ namespace LibraryPlusAssignment
                 //MergeSort(leftArray);
                 //MergeSort(rightArray);
                 //Merge(keys, m);
-                MergeSort(keys, i, m);
-                MergeSort(keys, m + 1, j);
-                Merge(keys,i,m,j);
+                MergeSort(movieArray, i, m);
+                MergeSort(movieArray, m + 1, j);
+                Merge(movieArray, i,m,j);
                 
             }
             
@@ -265,80 +280,76 @@ namespace LibraryPlusAssignment
 
 
         }
-        public void Merge(string[] keys, int i, int m, int j) 
+        public void Merge(Movie[] movieArray, int i, int m, int j) 
         { 
-            int leftstart = i;   
-            int rightstart = m + 1;
+            int leftStart = i;   
+            int rightStart = m + 1;
             int tempIndex = 0;
             Movie [] tempArray = new Movie[j - i + 1]; // Only working with that subsection of the array
-            Console.WriteLine("Keys array length: " + keys.Length);
-            while (leftstart <= m && rightstart <= j)
+            //Console.WriteLine("Keys array length: " + keys.Length);
+            while (leftStart <= m && rightStart <= j)
             {
-                Console.WriteLine("RightStart: " + rightstart);
-                Movie leftMovie = Search(keys[leftstart]);
-                Movie rightMovie = Search(keys[rightstart]);
+                //Console.WriteLine("RightStart: " + rightstart);
+                //Movie leftMovie = Search(keys[leftstart]);
+                //Movie rightMovie = Search(keys[rightstart]);
 
-                if (leftMovie != null && rightMovie != null)
+             
+                if (movieArray[leftStart].RentCount <= movieArray[rightStart].RentCount) //Increasing order, lowest to highest rented movie
                 {
-                    if (leftMovie.RentCount <= rightMovie.RentCount) //Increasing order, lowest to highest rented movie
-                    {
 
-                        tempArray[tempIndex] = leftMovie;
-                        leftstart++;
-                        tempIndex++;
-
-                    }
-                    else
-                    {
-                        tempArray[tempIndex] = rightMovie;
-                        rightstart++;
-                        tempIndex++;
-                    }
-                }
-                else if (leftMovie != null) //the movie on the right is null
-                {
-                    tempArray[tempIndex] = leftMovie; //add movie
-                    leftstart++; //advance pointer to compare with the next movie
-                    tempIndex++;   
+                    tempArray[tempIndex] = movieArray[leftStart];
+                    leftStart++;
+                    tempIndex++;
 
                 }
-
-                else if (rightMovie != null)
+                else
                 {
-                    tempArray[tempIndex] = rightMovie;
-                    rightstart++;
+                    tempArray[tempIndex] = movieArray[rightStart];
+                    rightStart++;
                     tempIndex++;
                 }
+                
+                //else if (leftMovie != null) //the movie on the right is null
+                //{
+                //    tempArray[tempIndex] = leftMovie; //add movie
+                //    leftstart++; //advance pointer to compare with the next movie
+                //    tempIndex++;   
+
+                //}
+
+                //else if (rightMovie != null)
+                //{
+                //    tempArray[tempIndex] = rightMovie;
+                //    rightstart++;
+                //    tempIndex++;
+                //}
 
 
             }
-            if (leftstart <= m)
+            if (leftStart <= m)
             {
-                for (int h = leftstart; h <= m; h++)
+                for (int h = leftStart; h <= m; h++)
                 {
                     Console.WriteLine("Left Remaining");
-                    Movie movie = Search(keys[h]);
-                    if (movie != null)
-                    {
-                        tempArray[tempIndex] = movie;
-                        tempIndex++;
+                    
+                    tempArray[tempIndex] = movieArray[h];
+                    leftStart++;
+                    tempIndex++;
 
-                    }
+                    
                 }  
 
             }
-            if(rightstart <= j)
+            if(rightStart <= j)
             {
-                for(int h = rightstart; h <= j; h++)
+                for(int h = rightStart; h <= j; h++)
                 {
                     Console.WriteLine("Right remaining");
-                    Movie movie = Search(keys[h]);
-                    if (movie != null)
-                    {
-                        tempArray[tempIndex] = movie;
-                        tempIndex++;
+                    
+                    tempArray[tempIndex] = movieArray[h];
+                    rightStart++;
+                    tempIndex++;
 
-                    }
                    
                 }
             }
@@ -347,7 +358,7 @@ namespace LibraryPlusAssignment
             for (int h = 0; h < tempArray.Length; h++)
             {
                 //keys[i] = tempArray[i].Title;   This was copying in the same position
-                keys[i + h] = tempArray[h].Title;
+                movieArray[i + h] = tempArray[h];
             }
 
 
