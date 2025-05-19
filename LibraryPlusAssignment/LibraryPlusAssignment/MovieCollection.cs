@@ -105,11 +105,6 @@ namespace LibraryPlusAssignment
 
         public Movie? Search(string movieTitle)
         {
-            //int sum = 0;
-            //foreach (char c in movieTitle)
-            //{
-            //    sum = sum + (int)c;
-            //}
             int sum = FoldingHashing(movieTitle);
             int index = DivisionHashing(sum);
 
@@ -192,9 +187,6 @@ namespace LibraryPlusAssignment
 
         }
 
-
-
-
         public void DisplayMovieByTitle(string title)
         {
             Movie? movie = Search(title);
@@ -218,112 +210,112 @@ namespace LibraryPlusAssignment
 
         }
 
-        public void DisplayTopThree()
-        {
-            string[] sortedKeys = new string[keys.Length];
-            Array.Copy(keys, 0, sortedKeys, 0, keys.Length);
-            MergeSort(sortedKeys);
+        // public void DisplayTopThree()
+        // {
+        //     string[] sortedKeys = new string[keys.Length];
+        //     Array.Copy(keys, 0, sortedKeys, 0, keys.Length);
+        //     MergeSort(sortedKeys);
 
-            for (int i = 0;  i < sortedKeys.Length; i++)
-            {
-                Movie movie = Search(sortedKeys[i]);
-                Console.WriteLine(movie.Title); 
-                Console.WriteLine(movie.RentCount); 
-            }
-            int milliseconds = 4000;
-            Thread.Sleep(milliseconds);
-
-
-        }
+        //     for (int i = 0;  i < sortedKeys.Length; i++)
+        //     {
+        //         Movie movie = Search(sortedKeys[i]);
+        //         Console.WriteLine(movie.Title); 
+        //         Console.WriteLine(movie.RentCount); 
+        //     }
+        //     int milliseconds = 4000;
+        //     Thread.Sleep(milliseconds);
 
 
-        //j = keys.Length();
-        public void MergeSort(string[] keys)
-        {
-            int i = 0; 
-            int j = keys.Length;
-            if (i < j) 
-            { 
-                int m = Convert.ToInt32((i + j) / 2);
-                string[] leftArray = keys[i..m];
-                string[] rightArray = keys[(m+1)..j];
-                MergeSort(leftArray);
-                MergeSort(rightArray);
-                Merge(keys, m);
+        // }
+
+
+        // //j = keys.Length();
+        // public void MergeSort(string[] keys)
+        // {
+        //     int i = 0; 
+        //     int j = keys.Length;
+        //     if (i < j) 
+        //     { 
+        //         int m = Convert.ToInt32((i + j) / 2);
+        //         string[] leftArray = keys[i..m];
+        //         string[] rightArray = keys[(m+1)..j];
+        //         MergeSort(leftArray);
+        //         MergeSort(rightArray);
+        //         Merge(keys, m);
                 
-            }
+        //     }
             
-            // m = (i + j/2).Convert.ToInt32()
-            // MergeSort(i,m)
-            //MergeSort(m+1, j)
-            //Merge ----
+        //     // m = (i + j/2).Convert.ToInt32()
+        //     // MergeSort(i,m)
+        //     //MergeSort(m+1, j)
+        //     //Merge ----
 
 
-        }
-        public void Merge(string[] keys, int m) 
-        { 
-            int leftstart = 0;
-            int rightstart = m + 1;
-            int tempIndex = 0;
-            Movie [] tempArray = new Movie[keys.Length]; 
-            Console.WriteLine("Keys array length: " + keys.Length);
-            while (leftstart <= m && rightstart < keys.Length)
-            {
-                Console.WriteLine("RightStart: " + rightstart);
-                Movie leftMovie = Search(keys[leftstart]);
-                Movie rightMovie = Search(keys[rightstart]);
+        // }
+        // public void Merge(string[] keys, int m) 
+        // { 
+        //     int leftstart = 0;
+        //     int rightstart = m + 1;
+        //     int tempIndex = 0;
+        //     Movie [] tempArray = new Movie[keys.Length]; 
+        //     Console.WriteLine("Keys array length: " + keys.Length);
+        //     while (leftstart <= m && rightstart < keys.Length)
+        //     {
+        //         Console.WriteLine("RightStart: " + rightstart);
+        //         Movie leftMovie = Search(keys[leftstart]);
+        //         Movie rightMovie = Search(keys[rightstart]);
 
-                if (leftMovie.RentCount <= rightMovie.RentCount)
-                {
+        //         if (leftMovie.RentCount <= rightMovie.RentCount)
+        //         {
              
-                    tempArray[tempIndex] = leftMovie;
-                    leftstart++;
-                    tempIndex++;
+        //             tempArray[tempIndex] = leftMovie;
+        //             leftstart++;
+        //             tempIndex++;
 
-                }
-                else
-                {
-                    tempArray[tempIndex] = rightMovie;
-                    rightstart++;
-                    tempIndex++;
+        //         }
+        //         else
+        //         {
+        //             tempArray[tempIndex] = rightMovie;
+        //             rightstart++;
+        //             tempIndex++;
 
                     
-                }
+        //         }
 
 
-            }
-            if (leftstart <= m)
-            {
-                for (int i = leftstart; i <= m; i++)
-                {
-                    Console.WriteLine("Left Remaining");
-                    Movie movie = Search(keys[leftstart]);
-                    tempArray[tempIndex] = movie;
-                    tempIndex++;
-                    leftstart++;
-                }  
+        //     }
+        //     if (leftstart <= m)
+        //     {
+        //         for (int i = leftstart; i <= m; i++)
+        //         {
+        //             Console.WriteLine("Left Remaining");
+        //             Movie movie = Search(keys[leftstart]);
+        //             tempArray[tempIndex] = movie;
+        //             tempIndex++;
+        //             leftstart++;
+        //         }  
 
-            }
-            if(rightstart < keys.Length)
-            {
-                for(int i = rightstart; i < keys.Length; i++)
-                {
-                    Console.WriteLine("Right remaining");
-                    Movie movie = Search(keys[rightstart]);
-                    tempArray[tempIndex] = movie;
-                    tempIndex++;
-                    rightstart++;
-                }
-            }
-
-
-            for (int i = rightstart; i < tempArray.Length; i++)
-            {
-                keys[i] = tempArray[i].Title;
-            }
+        //     }
+        //     if(rightstart < keys.Length)
+        //     {
+        //         for(int i = rightstart; i < keys.Length; i++)
+        //         {
+        //             Console.WriteLine("Right remaining");
+        //             Movie movie = Search(keys[rightstart]);
+        //             tempArray[tempIndex] = movie;
+        //             tempIndex++;
+        //             rightstart++;
+        //         }
+        //     }
 
 
-        }
+        //     for (int i = rightstart; i < tempArray.Length; i++)
+        //     {
+        //         keys[i] = tempArray[i].Title;
+        //     }
+
+
+        // }
 
 
     }
