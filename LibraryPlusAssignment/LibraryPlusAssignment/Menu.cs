@@ -131,7 +131,7 @@ namespace LibraryPlusAssignment
                 {
                     Console.Clear();
                     MovieCollection movieCollection = MovieCollection.GetInstance();
-                    movieCollection.DisplayMovieInfo();
+                    movieCollection.DisplayMovies();
                 }
                 else if (choice == "2")
                 {
@@ -139,7 +139,7 @@ namespace LibraryPlusAssignment
                     Console.Write("Title: ");
                     string? title = Console.ReadLine();
                     MovieCollection movieCollection = MovieCollection.GetInstance();
-                    movieCollection.DisplayMovieByTitle(title);
+                    movieCollection.DisplayMovieInfo(title);
 
 
                 }
@@ -169,7 +169,7 @@ namespace LibraryPlusAssignment
                 {
                     Console.Clear();
                     MovieCollection movieCollection = MovieCollection.GetInstance();
-                    movieCollection.DisplayTopThree();
+                    // movieCollection.DisplayTopThree();
 
 
                 }

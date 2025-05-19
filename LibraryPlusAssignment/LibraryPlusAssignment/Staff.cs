@@ -73,21 +73,31 @@ namespace LibraryPlusAssignment
             MovieCollection movieCollection = MovieCollection.GetInstance();
 
             //Check if the movie already exists
-            if (movieCollection.Search(movie.Title) != null)
+            // if (movieCollection.Search(movie.Title) != null)
+            // {
+            //     Console.WriteLine("Movie already exists");
+            //     var existingMovie = movieCollection.Search(movie.Title);
+            //     if (existingMovie != null)
+            //     {
+            //         existingMovie.Copies = copies;
+
+            //     }
+
+            //     Console.WriteLine("Copies updated");
+            //     return;
+            // }
+            if (movie != null)
             {
-                Console.WriteLine("Movie already exists");
-                var existingMovie = movieCollection.Search(movie.Title);
-                if (existingMovie != null)
-                {
-                    existingMovie.Copies = copies;
-
-                }
-
-                Console.WriteLine("Copies updated");
-                return;
+                
+                movieCollection.Insert(title, movie);
+                Console.WriteLine("Movie added to system");
             }
-            movieCollection.Insert(title, movie);
-            Console.WriteLine("Movie added to system");
+            else
+            {
+                Console.WriteLine("Error! Movie not added");
+            }
+            
+            
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
         }
