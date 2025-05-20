@@ -57,12 +57,12 @@ namespace LibraryPlusAssignment
             Head = newNode; // Ensure Head is not null before assignment
 
         }
-        public Member SearchMember(string fullName)
+        public Member? SearchMember(string fullName)
         {
-            Node<Member> current = Head; // Start from the head of the list
+            Node<Member>? current = Head; // Start from the head of the list
             while (current != null) // While there are nodes in the list
             {
-                if (current.Data.GetFullName() == fullName) // If the current node's member is equal to the searched member
+                if (current.Data != null && current.Data.GetFullName() == fullName) // If the current node's member is equal to the searched member
                 {
                     return current.Data; // Exit the method
                 }
@@ -74,12 +74,12 @@ namespace LibraryPlusAssignment
 
         public void Delete(string fullName)
         {
-            Node<Member> current = Head;
-            Node<Member> previous = null;
+            Node<Member>? current = Head;
+            Node<Member>? previous = null;
 
             while (current != null)
             {
-                if (current.Data.GetFullName() == fullName)
+                if (current.Data != null && current.Data.GetFullName() == fullName)
                 {
                     if (previous == null)
                     {
@@ -101,41 +101,23 @@ namespace LibraryPlusAssignment
         }
         public void PrintList()
         {
-            Node<Member> current = Head; // Starting from beginning/head of list
+            Node<Member>? current = Head; // Starting from beginning/head of list
             while (current != null) // While there are nodes in the list
             {
-                Console.WriteLine(current.Data.GetFullName()); // Print the member of the current node
+                if (current.Data != null)
+                {
+                    Console.WriteLine(current.Data.GetFullName()); // Print the member of the current node
+                }
                 current = current.Next; // Move to the next node
             }
         }
-        // Method to add a member
-        // public void AddMember(Member member)
-        // {
-        //     while (collection.Head != null) //While there are nodes in the list
-        //     {
-        //         if (collection.Head.Data.GetFullName() == member.GetFullName())//If the current node's member is equal to the searched member
-        //         {
-        //            Console.WriteLine("Member already exists" + member.GetFullName());
-        //             return; //Exit the method
-        //         }
-        //         else
-        //         {
-        //             collection.Head = collection.Head.Next; //Move to the next node
-        //         }
-
-        //     }
-        //     // If the member does not exist, add it to the collection
-        //     collection.InsertAtBeginning(member);
-        //     collection.PrintList();
-
-        // }
 
         public void SearchPhoneNumber(string fullName)
         {
             Node<Member>? current = Head; // Start from the head of the list
             while (current != null) //While there are nodes in the list
             {
-                if (current.Data.GetFullName() == fullName)//If the current node's member is equal to the searched member
+                if (current.Data != null && current.Data.GetFullName() == fullName)//If the current node's member is equal to the searched member
                 {
                     string phoneNumber = current.Data.PhoneNumber;
                     Console.WriteLine("Member" + " " + fullName + " " + "has phone number" + " " + phoneNumber);
@@ -153,9 +135,9 @@ namespace LibraryPlusAssignment
 
         }
 
-        public Member MemberLogIn(string firstName, string LastName, string password)
+        public Member? MemberLogIn(string firstName, string LastName, string password)
         {
-            Node<Member> current = Head; // Start from the head of the list
+            Node<Member>? current = Head; // Start from the head of the list
             while (current != null) // While there are nodes in the list
             {
                 if (current.Data.FirstName == firstName && current.Data.LastName == LastName && current.Data.Password == password)  // If the current node's member is equal to the searched member
@@ -170,9 +152,8 @@ namespace LibraryPlusAssignment
         public void SearchMemberByRentedMovies(string title)
         {
             Console.WriteLine("Entering Search member by movie");
-            Node<Member> current = Head;// Start from the head of the list
+            Node<Member>? current = Head;// Start from the head of the list
             string[] renters = new string[100];
-            int j = 0;
             while (current != null) // While there are nodes in the list
             {
                 //Console.WriteLine(current.Data.FirstName);
@@ -188,8 +169,6 @@ namespace LibraryPlusAssignment
             Console.ReadKey();
             return;
         }
-
-
 
     }
 

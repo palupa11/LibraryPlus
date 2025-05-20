@@ -26,7 +26,7 @@ namespace LibraryPlusAssignment
         {
             Console.WriteLine("Add DVD to the system");
             Console.Write("Title: ");
-            string title = Console.ReadLine();
+            string? title = Console.ReadLine();
             string genre;
             string[] validGenres = ["drama", "adventure", "family", "action", "sci-fi", "comedy", "animated", "thriller", "other"];
             while (true)
@@ -61,7 +61,7 @@ namespace LibraryPlusAssignment
             }
 
             Console.Write("Duration: ");
-            string duration = Console.ReadLine();
+            string? duration = Console.ReadLine();
             Console.Write("Copies: ");
             int copies;
             while (!int.TryParse(Console.ReadLine(), out copies))
@@ -88,7 +88,6 @@ namespace LibraryPlusAssignment
             // }
             if (movie != null)
             {
-                
                 movieCollection.Insert(title, movie);
                 Console.WriteLine("Movie added to system");
             }
@@ -105,8 +104,9 @@ namespace LibraryPlusAssignment
         public void RemoveMovie(string title, int copiesToRemove)
         {
             MovieCollection movieCollection = MovieCollection.GetInstance();
-            Movie movie = movieCollection.Search(title);
+            Movie? movie = movieCollection.Search(title);
             Console.WriteLine("Movie found with " + movie.Copies + " copies");
+            int milliseconds = 3000;
             if (movie.Copies >= copiesToRemove)
             {
                 movie.Copies -= copiesToRemove;
@@ -114,21 +114,18 @@ namespace LibraryPlusAssignment
                 {
                     movieCollection.Delete(title);
                     Console.WriteLine("Movie removed from system");
-                    int milliseconds = 3000;
-                    Thread.Sleep(milliseconds);
                 }
                 else
                 {
                     Console.WriteLine("Copies updated to " + movie.Copies);
-                    int milliseconds = 3000;
-                    Thread.Sleep(milliseconds);
+
                 }
+                Thread.Sleep(milliseconds);
                 return;
             }
             else
             {
                 Console.WriteLine("Not enough copies to remove");
-                int milliseconds = 3000;
                 Thread.Sleep(milliseconds);
                 return;
             }
@@ -139,7 +136,7 @@ namespace LibraryPlusAssignment
             Member member = new Member(firstName, lastName, phoneNumber, password);
             MemberCollection memberCollection = MemberCollection.GetInstance();
             int milliseconds = 3000;
-            Member existingMember = memberCollection.SearchMember(member.GetFullName());
+            Member? existingMember = memberCollection.SearchMember(member.GetFullName());
             if (existingMember != null)
             {
                 Console.WriteLine("Member already exists");
@@ -156,7 +153,7 @@ namespace LibraryPlusAssignment
         public void RemoveMember(string fullName)
         {
             MemberCollection memberCollection = MemberCollection.GetInstance();
-            Member member = memberCollection.SearchMember(fullName);
+            Member? member = memberCollection.SearchMember(fullName);
             if (member != null)
             {
                 if (member.rentedMovies.Length > 0)

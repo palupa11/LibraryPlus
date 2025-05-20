@@ -13,7 +13,7 @@ namespace LibraryPlusAssignment
         private HashEntry<string, Movie>?[] collection;
         public int Movietitle { get; set; }
         private int movieCount = 0;
-        public const int COLLECTION_SIZE = 5;
+        public const int COLLECTION_SIZE = 1000;
         //private Constructor to prevent instantiation from outside the class
         private MovieCollection()
         {
@@ -37,14 +37,12 @@ namespace LibraryPlusAssignment
             if (title.Length % 2 != 0)
                 title += " ";
 
-
             for (int i = 0; i < title.Length; i = i + 2)
             {
                 int group = (int)title[i] * 256 + (int)title[i + 1];
                 sum += group;
 
             }
-            Console.WriteLine("FoldingHashing function sum :" + sum);
 
             return sum;
 
@@ -69,8 +67,6 @@ namespace LibraryPlusAssignment
 
             return current;
 
-
-
         }
         //hashing algorithm ends here
         public void Insert(string movieTitle, Movie movie)
@@ -91,8 +87,6 @@ namespace LibraryPlusAssignment
 
             }
             movieCount++;
-            Console.WriteLine("Movie inserted");
-            Console.ReadKey();
 
         }
 
@@ -129,17 +123,19 @@ namespace LibraryPlusAssignment
 
         public void DisplayMovies()
         {
+            Console.WriteLine("Title");
+            Console.WriteLine("------");
             for (int i = 0; i < collection.Length; i++)
             {
                 HashEntry<string, Movie>? current = collection[i];
                 while (current != null)
                 {
-                    Console.WriteLine("Title: " + current.Key);
+                    Console.WriteLine(current.Key);
                     current = current.Next;
                 }
             }
 
-            Console.WriteLine("===================================================================================");
+            Console.WriteLine("=====================================================");
             Console.WriteLine("Total number of movies in the system: " + movieCount);
             Console.ReadKey();
         }
@@ -153,11 +149,9 @@ namespace LibraryPlusAssignment
             }
             else
             {
-                Console.WriteLine("Titles: " + movie?.Title);
-                Console.WriteLine("Genre: " + movie?.Genre);
-                Console.WriteLine("Classification: " + movie?.Classification);
-                Console.WriteLine("Duration: " + movie?.Duration);
-                Console.WriteLine("Copies: " + movie?.Copies);
+                Console.Clear();
+                Console.WriteLine("Titles\tGenre\tClassification\tDuration\tCopies:");
+                Console.WriteLine(movie?.Title + "\t" + movie?.Genre + "\t" + movie?.Classification + "\t\t" + movie?.Duration + "\t\t" + movie?.Copies);
             }
             Console.ReadKey();
 

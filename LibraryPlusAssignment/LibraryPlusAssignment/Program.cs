@@ -120,6 +120,12 @@ namespace LibraryPlusAssignment
                         menu.StaffMenu(staff);
                         Console.Clear();
                     }
+                    else
+                    {
+                        Console.WriteLine("Incorrect username or password. Enter any key to continue...");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
 
                 }
                 else if (option == 2)
@@ -132,7 +138,7 @@ namespace LibraryPlusAssignment
                     Console.Write("Enter 4 digit password: ");
                     string? password = Console.ReadLine();
                     MemberCollection collection = MemberCollection.GetInstance();
-                    Member member = collection.MemberLogIn(firstName, lastName, password);
+                    Member? member = collection.MemberLogIn(firstName, lastName, password);
                     if(member == null){
                         Console.Write("Invalid details, try again:");
                     }
@@ -140,11 +146,6 @@ namespace LibraryPlusAssignment
                          menu.MemberMenu(member);
 
                     }
-
-
-                   
-
-
 
                 }
                 else if (option == 0)

@@ -17,7 +17,9 @@ namespace LibraryPlusAssignment
                 Console.WriteLine("1. Staff");
                 Console.WriteLine("2. Member");
                 Console.WriteLine("0. End the program");
+                Console.Write("Enter your choice ==> ");
                 int option = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
                 return option;
             }
         }
@@ -35,7 +37,7 @@ namespace LibraryPlusAssignment
                 Console.WriteLine("5. Find a member contact phone number, given the member's name");
                 Console.WriteLine("6. Find members who are currently renting a particular movie");
                 Console.WriteLine("0. Return to main menu");
-                Console.WriteLine("Enter your choice --->");
+                Console.Write("Enter your choice --->");
                 string? choice = Console.ReadLine();
                 if (choice == "0")
                 {
@@ -50,10 +52,14 @@ namespace LibraryPlusAssignment
                 {
                     Console.Clear();
                     Console.WriteLine("Enter the title of the movie you want to remove:");
-                    string title = Console.ReadLine();
+                    string? title;
+                    do
+                    {
+                        title = Console.ReadLine();
+                    }
+                    while (string.IsNullOrWhiteSpace(title));
                     Console.WriteLine("Enter the number of copies you want to remove:");
                     int copies = Convert.ToInt32(Console.ReadLine());
-
                     staff.RemoveMovie(title, copies);
                 }
                 else if (choice == "3")
@@ -68,9 +74,9 @@ namespace LibraryPlusAssignment
                     string? PhoneNumber = Console.ReadLine();
                     Console.Write("Password: ");
                     string? newPassword = Console.ReadLine();
-                    while (newPassword.Length != 4)
+                    while (string.IsNullOrEmpty(newPassword) || newPassword.Length != 4)
                     {
-                        Console.WriteLine("Password must be at least 4 characters long. Please enter a new password:");
+                        Console.WriteLine("Password must be exactly 4 characters long. Please enter a new password:");
                         newPassword = Console.ReadLine();
                     }
                     staff.AddMember(FirstName, LastName, PhoneNumber, newPassword);
@@ -147,7 +153,7 @@ namespace LibraryPlusAssignment
                 {
                     Console.Clear();
                     Console.Write("Enter title to borrow: ");
-                    string title = Console.ReadLine();
+                    string? title = Console.ReadLine();
                     member.BorrowMovie(title);
 
 
@@ -156,7 +162,7 @@ namespace LibraryPlusAssignment
                 {
                     Console.Clear();
                     Console.Write("Enter title to return: ");
-                    string title = Console.ReadLine();
+                    string? title = Console.ReadLine();
                     member.ReturnMovie(title);
 
                 }

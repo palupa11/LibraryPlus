@@ -16,7 +16,7 @@ namespace LibraryPlusAssignment
         public string PhoneNumber { get; set; }
         public string[] rentedMovies; // Array to store borrowed movies
         public int BorrowedCount { get; set; } = 0; // Counter for borrowed movies
-
+        public int BorrowLimit {get; set; } = 5;
         //Constructor
 
         public Member(string firstName, string lastName, string phoneNumber, string password)
@@ -25,10 +25,10 @@ namespace LibraryPlusAssignment
             LastName = lastName;
             PhoneNumber = phoneNumber;
             Password = password;
-            rentedMovies = new string[5]; // Initialize the array with a size of 10       
+            rentedMovies = new string[BorrowLimit]; // Initialize the array with a size of 10       
 
         }
-        public String GetFullName()
+        public string GetFullName()
         {
             return FirstName + " " + LastName;
         }
@@ -65,39 +65,38 @@ namespace LibraryPlusAssignment
 
         public void ReturnMovie(string movieTitle)
         {
-            int milliseconds = 3000;
             for (int i = 0; i <= BorrowedCount; i++)
             {
                 if (rentedMovies[i] == movieTitle)
                 {
-                    rentedMovies[i] = null;
+                    rentedMovies[i] = "";
                     BorrowedCount--;
                     MovieCollection movieCollection = MovieCollection.GetInstance();
-                    Movie movie = movieCollection.Search(movieTitle);
+                    Movie? movie = movieCollection.Search(movieTitle);
                     movie.Copies++;
                     Console.WriteLine("Movie returned successfully");
-                    Thread.Sleep(milliseconds);
-
-
+                    Console.ReadKey();
+                    return;
                 }
-                else
-                {
-                    Console.WriteLine("You are currently not renting that movie");
-                    Thread.Sleep(milliseconds);
-                }
+
 
             }
+            Console.WriteLine("You are currently not renting that movie");
+            Console.ReadKey();
 
         }
         public void ListBorrowedMovies()
         {
-            int milliseconds = 3000;
             Console.WriteLine("***List of Currently Borrowed movies***");
-            for (int i = 0; i < BorrowedCount; i++)
+            for (int i = 0; i < BorrowLimit; i++)
             {
-                Console.WriteLine(rentedMovies[i]);
+                if (rentedMovies[i] != "" || rentedMovies[i] != null)
+                {
+                    Console.WriteLine(rentedMovies[i]);
+                }
+                
             }
-            Thread.Sleep(milliseconds);
+            Console.ReadKey();
 
         }
 
@@ -111,7 +110,7 @@ namespace LibraryPlusAssignment
             }
             Console.ReadKey();
         }
-        
-        
+
+
     }
 }
