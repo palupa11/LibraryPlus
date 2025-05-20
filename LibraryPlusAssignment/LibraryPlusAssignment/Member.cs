@@ -63,10 +63,13 @@ namespace LibraryPlusAssignment
             }
         }
 
-        public void ReturnMovie(string movieTitle){
+        public void ReturnMovie(string movieTitle)
+        {
             int milliseconds = 3000;
-            for(int i = 0; i <= BorrowedCount; i++){
-                if(rentedMovies[i] == movieTitle){
+            for (int i = 0; i <= BorrowedCount; i++)
+            {
+                if (rentedMovies[i] == movieTitle)
+                {
                     rentedMovies[i] = null;
                     BorrowedCount--;
                     MovieCollection movieCollection = MovieCollection.GetInstance();
@@ -74,9 +77,11 @@ namespace LibraryPlusAssignment
                     movie.Copies++;
                     Console.WriteLine("Movie returned successfully");
                     Thread.Sleep(milliseconds);
-                    
 
-                }else{
+
+                }
+                else
+                {
                     Console.WriteLine("You are currently not renting that movie");
                     Thread.Sleep(milliseconds);
                 }
@@ -84,15 +89,29 @@ namespace LibraryPlusAssignment
             }
 
         }
-        public void ListBorrowedMovies(){
+        public void ListBorrowedMovies()
+        {
             int milliseconds = 3000;
             Console.WriteLine("***List of Currently Borrowed movies***");
-            for(int i = 0; i< BorrowedCount; i++){
+            for (int i = 0; i < BorrowedCount; i++)
+            {
                 Console.WriteLine(rentedMovies[i]);
             }
             Thread.Sleep(milliseconds);
-            
+
         }
+
+        public void DisplayTopThree(MovieCollection movieCollection)
+        {
+            string[] sortedMovies = movieCollection.SortByRentCount();
+            Console.WriteLine("Top Three Movies: ");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine(sortedMovies[i]);
+            }
+            Console.ReadKey();
+        }
+        
         
     }
 }

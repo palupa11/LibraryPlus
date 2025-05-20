@@ -169,7 +169,7 @@ namespace LibraryPlusAssignment
                 {
                     Console.Clear();
                     MovieCollection movieCollection = MovieCollection.GetInstance();
-                    // movieCollection.DisplayTopThree();
+                    member.DisplayTopThree(movieCollection);
 
 
                 }

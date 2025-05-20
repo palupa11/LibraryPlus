@@ -163,6 +163,92 @@ namespace LibraryPlusAssignment
 
         }
 
+        //sorting starts here
+        public void MergeSort(string[] A, int initialIndex, int finalIndex)
+        {
+            if (initialIndex < finalIndex)
+            {
+                int midpoint = (initialIndex + finalIndex) / 2;
+                // Console.WriteLine("The midpoint is: " + midpoint);
+                MergeSort(A, initialIndex, midpoint);
+                MergeSort(A, midpoint + 1, finalIndex);
+                Merge(A, initialIndex, finalIndex, midpoint);
+
+
+            }
+
+
+        }
+
+        public void Merge(string[] A, int initialIndex, int finalIndex, int mid)
+        {
+            int rightStart = mid + 1;
+            int tempLength = finalIndex - initialIndex + 1;
+            string[] temp = new string[tempLength];
+
+            int leftStart = initialIndex;
+
+            int tempIndex = 0;
+            while (leftStart <= mid && rightStart <= finalIndex)
+            {
+                Movie? leftMovie = Search(A[leftStart]);
+                Movie? rightMovie = Search(A[rightStart]);
+                if (leftMovie.RentCount >= rightMovie.RentCount)
+                {
+                    temp[tempIndex] = A[leftStart];
+                    leftStart++;
+                }
+                else
+                {
+                    temp[tempIndex] = A[rightStart];
+                    rightStart++;
+                }
+                tempIndex++;
+            }
+
+            while (leftStart <= mid)
+            {
+                temp[tempIndex] = A[leftStart];
+                tempIndex++;
+                leftStart++;
+            }
+            while (rightStart <= finalIndex)
+            {
+                temp[tempIndex] = A[rightStart];
+                tempIndex++;
+                rightStart++;
+            }
+            // Console.WriteLine("Left start at the end" + leftStart);
+            // Console.WriteLine("Temp array length" + tempLength);
+            for (int i = 0; i < tempLength; i++)
+            {
+                A[initialIndex + i] = temp[i];
+            }
+        }
+
+
+
+        public string[] SortByRentCount()
+        {
+            string[] movieNames = new string[movieCount];
+            int j = 0;
+            for (int i = 0; i < collection.Length; i++)
+            {
+                HashEntry<string, Movie>? current = collection[i];
+                while (current != null)
+                {
+                    movieNames[j] = current.Key;
+                    j++;
+                    current = current.Next;
+                }
+
+            }
+            MergeSort(movieNames, 0, movieNames.Length - 1);
+            return movieNames;
+        }
+
+
+
 
 
 
