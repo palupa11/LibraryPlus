@@ -34,7 +34,6 @@ namespace LibraryPlusAssignment
         //Hashing algorithms starts here
         public int FoldingHashing(string title)
         {
-            //Console.WriteLine("Entering folding hash");
             int sum = 0;
             //If it is an odd number 
             if (title.Length % 2 != 0)

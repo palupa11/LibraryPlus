@@ -13,6 +13,7 @@ namespace LibraryPlusAssignment
         public int DisplayMenu()
         {
             {
+                Console.Clear();
                 Console.WriteLine("Main Menu");
                 Console.WriteLine("1. Staff");
                 Console.WriteLine("2. Member");
@@ -37,7 +38,7 @@ namespace LibraryPlusAssignment
                 Console.WriteLine("5. Find a member contact phone number, given the member's name");
                 Console.WriteLine("6. Find members who are currently renting a particular movie");
                 Console.WriteLine("0. Return to main menu");
-                Console.Write("Enter your choice --->");
+                Console.Write("Enter your choice ---> ");
                 string? choice = Console.ReadLine();
                 if (choice == "0")
                 {
@@ -65,20 +66,55 @@ namespace LibraryPlusAssignment
                 else if (choice == "3")
                 {
                     Console.Clear();
+                    string? FirstName;
+                    string? LastName;
+                    string? PhoneNumber;
+                    string? newPassword;
                     Console.WriteLine("Register a new member to system");
-                    Console.Write("First Name: ");
-                    string? FirstName = Console.ReadLine();
-                    Console.Write("Last Name: ");
-                    string? LastName = Console.ReadLine();
-                    Console.Write("Phone Number: ");
-                    string? PhoneNumber = Console.ReadLine();
-                    Console.Write("Password: ");
-                    string? newPassword = Console.ReadLine();
-                    while (string.IsNullOrEmpty(newPassword) || newPassword.Length != 4)
+
+                    do
                     {
-                        Console.WriteLine("Password must be exactly 4 characters long. Please enter a new password:");
+                        Console.Write("First Name: ");
+                        FirstName = Console.ReadLine();
+                        if (string.IsNullOrEmpty(FirstName))
+                        {
+                            Console.WriteLine("First Name cannot be empty. Please enter a valid First Name.");
+                        }
+                    } while (string.IsNullOrEmpty(FirstName));
+
+                    // Prompt for Last Name
+                    do
+                    {
+                        Console.Write("Last Name: ");
+                        LastName = Console.ReadLine();
+                        if (string.IsNullOrEmpty(LastName))
+                        {
+                            Console.WriteLine("Last Name cannot be empty. Please enter a valid Last Name.");
+                        }
+                    } while (string.IsNullOrEmpty(LastName));
+
+                    // Prompt for Phone Number
+                    do
+                    {
+                        Console.Write("Phone Number: ");
+                        PhoneNumber = Console.ReadLine();
+                        if (string.IsNullOrEmpty(PhoneNumber))
+                        {
+                            Console.WriteLine("Phone Number cannot be empty. Please enter a valid Phone Number.");
+                        }
+                    } while (string.IsNullOrEmpty(PhoneNumber));
+
+                    // Prompt for Password
+                    do
+                    {
+                        Console.Write("Password: ");
                         newPassword = Console.ReadLine();
-                    }
+                        if (string.IsNullOrEmpty(newPassword) || newPassword.Length != 4)
+                        {
+                            Console.WriteLine("Password must be exactly 4 characters long. Please enter a new password:");
+                        }
+                    } while (string.IsNullOrEmpty(newPassword) || newPassword.Length != 4);
+
                     staff.AddMember(FirstName, LastName, PhoneNumber, newPassword);
                 }
                 else if (choice == "4")
@@ -87,7 +123,15 @@ namespace LibraryPlusAssignment
                     Console.WriteLine("Remove a registered member from system");
                     Console.Write("Enter the member's full name: ");
                     string? fullName = Console.ReadLine();
-                    staff.RemoveMember(fullName);
+                    if (!string.IsNullOrEmpty(fullName))
+                    {
+                        staff.RemoveMember(fullName);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid name entered. Please press any key to continue....");
+                        Console.ReadKey();
+                    }
                 }
                 else if (choice == "5")
                 {
@@ -95,14 +139,29 @@ namespace LibraryPlusAssignment
                     Console.WriteLine("Find a member's contact phone number, given the member's name");
                     Console.Write("Enter the member's full name: ");
                     string? fullName = Console.ReadLine();
-                    staff.GetMemberPhoneNumber(fullName);
+                    if (!string.IsNullOrEmpty(fullName))
+                    {
+                        staff.GetMemberPhoneNumber(fullName);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid name entered. Please press any key to continue....");
+                        Console.ReadKey();
+                    }
 
                 }
                 else if (choice == "6") { 
                    Console.Write("Enter movie title: ");
                    string? title = Console.ReadLine();
                    MemberCollection collection = MemberCollection.GetInstance();
-                   collection.SearchMemberByRentedMovies(title);
+                   if (!string.IsNullOrEmpty(title))
+                   {
+                       collection.SearchMemberByRentedMovies(title);
+                   }
+                   else
+                   {
+                       Console.WriteLine("Invalid title entered. Please press any key to continue....");
+                   }
                    Console.ReadKey();
 
 
@@ -145,7 +204,15 @@ namespace LibraryPlusAssignment
                     Console.Write("Title: ");
                     string? title = Console.ReadLine();
                     MovieCollection movieCollection = MovieCollection.GetInstance();
-                    movieCollection.DisplayMovieInfo(title);
+                    if (!string.IsNullOrEmpty(title))
+                    {
+                        movieCollection.DisplayMovieInfo(title);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid title entered. Please press any key to continue....");
+                        Console.ReadKey();
+                    }
 
 
                 }
@@ -154,7 +221,15 @@ namespace LibraryPlusAssignment
                     Console.Clear();
                     Console.Write("Enter title to borrow: ");
                     string? title = Console.ReadLine();
-                    member.BorrowMovie(title);
+                    if (!string.IsNullOrEmpty(title))
+                    {
+                        member.BorrowMovie(title);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid title entered. Please press any key to continue....");
+                        Console.ReadKey();
+                    }
 
 
                 }
@@ -163,8 +238,18 @@ namespace LibraryPlusAssignment
                     Console.Clear();
                     Console.Write("Enter title to return: ");
                     string? title = Console.ReadLine();
-                    member.ReturnMovie(title);
+                    if (!string.IsNullOrEmpty(title))
+                    {
+                        member.ReturnMovie(title);
 
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid title entered. Please press any key to continue....");
+                        Console.ReadKey();
+                    }
+                    
+                   
                 }
                 else if (choice == "5")
                 {

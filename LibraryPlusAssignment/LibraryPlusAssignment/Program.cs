@@ -7,100 +7,10 @@ namespace LibraryPlusAssignment
     internal class Program
     {
 
-        // public static void StaffMenu()
-        // {   
-
-        //     if (username == "staff" || password == "today123")
-        //     {
-        //         Console.WriteLine("Login Successful");
-        //         Staff staff = new Staff(username, password);
-        //         do
-        //         { 
-        //         Console.Clear();  
-        //         Console.WriteLine("Staff Menu");
-        //         Console.WriteLine("---------------------------------------");
-        //         Console.WriteLine("1. Add DVDs to system");
-        //         Console.WriteLine("2. Remove DVDs from system");
-        //         Console.WriteLine("3. Register a new member to system");
-        //         Console.WriteLine("4. Remove a registered member from system");
-        //         Console.WriteLine("5. Find a member contact phone number, given the member's name");
-        //         Console.WriteLine("6. Find members who are currently renting a particular movie");
-        //         Console.WriteLine("0. Return to main menu");
-        //         Console.WriteLine("Enter your choice --->");
-        //         string? choice = Console.ReadLine();
-        //         if (choice == "1")
-        //         {   
-        //             Console.Clear();
-        //             Console.Write("Title: ");
-        //             string? title = Console.ReadLine();
-        //             Console.WriteLine("A Genre can be Drama, adventure, family, action, sci-fi,comedy, animated, thriller, or other");
-        //             Console.Write("Genre: ");
-        //             string? genre = Console.ReadLine();
-        //             Console.WriteLine("A movie is classified as General (G), Parental Guidance(PG), Mature (M15+), or Mature Accompanied (MA15+)");
-        //             Console.WriteLine("Enter G, PG, M or MA: ");
-        //             Console.Write("classification: ");
-        //             string? classification = Console.ReadLine();
-        //             Console.Write("Duration(in minuites): ");
-        //             string? duration = Console.ReadLine();
-        //             Console.Write("Copies: ");
-        //             int copies = Convert.ToInt32(Console.ReadLine());
-        //             staff.AddMovie(title, genre, classification, duration, copies);
-
-        //         }else if (choice == "2")
-        //         {
-
-        //             // Remove DVDs from system
-        //         }else if (choice == "3")
-        //         {
-        //             // Register a new member to system
-        //             Console.Write("First Name: ");
-        //             string? FirstName = Console.ReadLine();
-        //             Console.Write("Last Name: ");
-        //             string? LastName = Console.ReadLine();
-        //             Console.Write("Phone Number: ");
-        //             string? PhoneNumber = Console.ReadLine();
-        //             Console.Write("Password: ");
-        //             string? newPassword = Console.ReadLine();
-
-        //             staff.AddMember(FirstName, LastName, PhoneNumber, newPassword);
-        //             Console.WriteLine("Member added to system");
-
-
-        //         }else if (choice == "4")
-        //         {
-        //             // Remove a registered member from system
-        //         }else if (choice == "5")
-        //         {
-        //             // Find a member contact phone number, given the member's name
-        //         }else if (choice == "6")    
-        //         {
-        //             // Find members who are currently renting a particular movie
-        //         }
-        //         else
-        //         {
-        //             Console.WriteLine("Invalid option. Please try again.");
-        //         }
-
-        //     }while(Console.ReadLine() != "0");
-
-        //     }else {
-        //         Console.WriteLine("Invalid username or password");
-        //     }
-
-
-        // }
-
         static void Main(string[] args)
         {
-            Console.WriteLine("=========Movie Title Generator TEST ==========");
-            ExperimentalTests.GenerateTestMovies(2000);
-            //int[] testTitles = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000];
-            //for (int i = 0; i < testTitles.Length; i++)
-            //{ 
-            //    ExperimentalTests.GenerateTestMovies(testTitles[i]);
-
-            //}
-
+            // Console.WriteLine("=========Movie Title Generator TEST ==========");
+            // ExperimentalTests.GenerateTestMovies(2000);
 
             Console.WriteLine("===================================================================================");
             Console.WriteLine("COMMUNITY  LIBRARY MOVIE DVD MANAGEMENT SYSTEM");
@@ -140,14 +50,34 @@ namespace LibraryPlusAssignment
                 else if (option == 2)
                 {
                     Console.Clear();
-                    Console.Write("Enter first name: ");
-                    string? firstName = Console.ReadLine(); 
-                    Console.Write("Enter last name: ");
-                    string? lastName = Console.ReadLine();
-                    Console.Write("Enter 4 digit password: ");
-                    string? password = Console.ReadLine();
+                    string? firstName = "";
+                    string? lastName = "";
+                    string? password = "";
+                    while (string.IsNullOrWhiteSpace(firstName))
+                    {
+                        Console.Write("Enter first name: ");
+                        firstName = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(firstName))
+                            Console.WriteLine("First name cannot be empty");  
+                    }
+                    while (string.IsNullOrWhiteSpace(lastName))
+                    {
+                        Console.Write("Enter last name: ");
+                        lastName = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(lastName))
+                            Console.WriteLine("Last name name cannot be empty");  
+                    }
+                    while (string.IsNullOrEmpty(password) && password.Length != 4)
+                    {
+                        Console.Write("Enter 4 digit password: ");
+                        password = Console.ReadLine();
+                        if (string.IsNullOrEmpty(password) && password.Length != 4)
+                            Console.WriteLine("Password cannot be empty or more than 4 characters");
+                        
+                    }
+                    
                     MemberCollection collection = MemberCollection.GetInstance();
-                    Member? member = collection.MemberLogIn(firstName, lastName, password);
+                    Member? member = collection.MemberLogIn(firstName!, lastName!, password!);
                     if(member == null){
                         Console.Write("Invalid details, try again:");
                     }

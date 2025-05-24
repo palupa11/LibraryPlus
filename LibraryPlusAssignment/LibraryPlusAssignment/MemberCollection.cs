@@ -11,30 +11,24 @@ namespace LibraryPlusAssignment
     {
         // Singleton instance
         private static MemberCollection? instance;
-        // private static readonly object lockObj = new object(); // Lock for thread safety
-
-        // Data fields
-        // private LinkedList<Member> collection;
         public Node<Member>? Head { get; set; }
         public int Count { get; set; }
         // Private constructor to prevent instantiation
         private MemberCollection()
         {
-            Head = null; // Explicitly initialize Head to null
+            Head = null;
             Count = 0;
         }
-
+        
         // Public method to get the singleton instance
         public static MemberCollection GetInstance()
         {
+
             if (instance == null)
             {
-
-                if (instance == null)
-                {
-                    instance = new MemberCollection();
-                }
+                instance = new MemberCollection();
             }
+
 
             return instance;
         }
@@ -129,7 +123,8 @@ namespace LibraryPlusAssignment
 
                 }
                 // If the member does not exist, return null
-                Console.WriteLine("Member not found");
+                Console.WriteLine("Member not found. Enter any key to continue...");
+                Console.ReadKey();
             }
 
 
@@ -140,7 +135,7 @@ namespace LibraryPlusAssignment
             Node<Member>? current = Head; // Start from the head of the list
             while (current != null) // While there are nodes in the list
             {
-                if (current.Data.FirstName == firstName && current.Data.LastName == LastName && current.Data.Password == password)  // If the current node's member is equal to the searched member
+                if (current.Data != null && current.Data.FirstName == firstName && current.Data.LastName == LastName && current.Data.Password == password)  // If the current node's member is equal to the searched member
                 {
                     return current.Data; // Exit the method
                 }
@@ -153,15 +148,17 @@ namespace LibraryPlusAssignment
         {
             Console.WriteLine("Entering Search member by movie");
             Node<Member>? current = Head;// Start from the head of the list
-            string[] renters = new string[100];
             while (current != null) // While there are nodes in the list
             {
                 //Console.WriteLine(current.Data.FirstName);
-                for (int i = 0; i < current.Data.BorrowedCount; i++)
+                if (current.Data != null)
                 {
-                    if (current.Data.rentedMovies[i] == title)
+                    for (int i = 0; i < current.Data.BorrowedCount; i++)
                     {
-                        Console.WriteLine(current.Data.GetFullName());
+                        if (current.Data.rentedMovies[i] == title)
+                        {
+                            Console.WriteLine(current.Data.GetFullName());
+                        }
                     }
                 }
                 current = current.Next; // Move to the next node

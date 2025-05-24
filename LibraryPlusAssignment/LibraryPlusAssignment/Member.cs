@@ -74,15 +74,17 @@ namespace LibraryPlusAssignment
                     BorrowedCount--;
                     MovieCollection movieCollection = MovieCollection.GetInstance();
                     Movie? movie = movieCollection.Search(movieTitle);
-                    movie.Copies++;
-                    Console.WriteLine("Movie returned successfully");
-                    Console.ReadKey();
+                    if (movie != null)
+                    {
+                        movie.Copies++;
+                        Console.WriteLine("Movie returned successfully. Enter any key to continue...");
+                        Console.ReadKey();
+                    }
+                    
                     return;
                 }
-
-
             }
-            Console.WriteLine("You are currently not renting that movie");
+            Console.WriteLine("You are currently not renting that movie. Enter any key to continue");
             Console.ReadKey();
 
         }
@@ -105,6 +107,7 @@ namespace LibraryPlusAssignment
         {
             //Stopwatch stopwatch = new Stopwatch();
             //stopwatch.Start();
+        
             string[] sortedMovies = movieCollection.SortByRentCount();
             //stopwatch.Stop();
             //Console.WriteLine("Time taken to sort: " + stopwatch.ElapsedMilliseconds + " ms");

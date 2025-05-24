@@ -105,7 +105,12 @@ namespace LibraryPlusAssignment
         {
             MovieCollection movieCollection = MovieCollection.GetInstance();
             Movie? movie = movieCollection.Search(title);
-            Console.WriteLine("Movie found with " + movie.Copies + " copies");
+            if (movie == null)
+            {
+                Console.WriteLine("Movie not found. Enter any key to continue");
+                Console.ReadKey();
+                return;
+            }
             int milliseconds = 3000;
             if (movie.Copies >= copiesToRemove)
             {
@@ -156,21 +161,24 @@ namespace LibraryPlusAssignment
             Member? member = memberCollection.SearchMember(fullName);
             if (member != null)
             {
-                if (member.rentedMovies.Length > 0)
+                if (member.BorrowedCount > 0)
                 {
-                    Console.WriteLine("The member must return the rented DVDs before they can removed");
+                    Console.WriteLine("The member must return the rented DVDs before they can removed. Enter any key to continue...");
+                    Console.ReadKey();
                     return;
                 }
                 else
                 {
                     memberCollection.Delete(fullName);
                     memberCollection.PrintList();
-                    Console.WriteLine("Member removed from system");
-                    int milliseconds = 3000;
-                    Thread.Sleep(milliseconds);
+                    Console.WriteLine("Member removed from system. Enter any key to continue....");
+                    Console.ReadKey();
                 }
-            }else {
-                Console.WriteLine("Member not found");
+            }
+            else
+            {
+                Console.WriteLine("Member not found. Enter any key to continue...");
+                Console.ReadKey();
             }
 
         }
@@ -179,8 +187,8 @@ namespace LibraryPlusAssignment
         {
             MemberCollection memberCollection = MemberCollection.GetInstance();
             memberCollection.SearchPhoneNumber(fullName);
-            int milliseconds = 3000;
-            Thread.Sleep(milliseconds);
+            Console.WriteLine("Enter any key to continue....");
+            Console.ReadKey();
         }
     }
 }
