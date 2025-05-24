@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace LibraryPlusAssignment
         public int Movietitle { get; set; }
         private int movieCount = 0;
         public const int COLLECTION_SIZE = 1000;
+        public int BasicOperationCount { get; set; }  
         //private Constructor to prevent instantiation from outside the class
         private MovieCollection()
         {
@@ -32,6 +34,7 @@ namespace LibraryPlusAssignment
         //Hashing algorithms starts here
         public int FoldingHashing(string title)
         {
+            //Console.WriteLine("Entering folding hash");
             int sum = 0;
             //If it is an odd number 
             if (title.Length % 2 != 0)
@@ -39,13 +42,19 @@ namespace LibraryPlusAssignment
 
             for (int i = 0; i < title.Length; i = i + 2)
             {
-                int group = (int)title[i] * 256 + (int)title[i + 1];
-                sum += group;
+                int firstLetter = (int)title[i];
+                //Console.WriteLine("1st letter: " + firstLetter);
+                int secondLetter = (int)title[i + 1];
+                //Console.WriteLine("2nd letter: "+ secondLetter);
+                string pairedLetters = Convert.ToString(firstLetter) + Convert.ToString(secondLetter);
+                //Console.WriteLine("Concatenated letters: " + pairedLetters);
+                int finalValue = Convert.ToInt32(pairedLetters);
+                //Console.WriteLine("final value: " + finalValue);
+                sum += finalValue;
 
             }
-
             return sum;
-
+           
         }
         public int DivisionHashing(int sum)
         {
@@ -54,7 +63,7 @@ namespace LibraryPlusAssignment
             return modulus;
 
         }
-        public HashEntry<string, Movie> collisionStrategy(int index)
+        public HashEntry<string, Movie> CollisionStrategy(int index)
         {
             Console.WriteLine("Entering collision strategy");
             HashEntry<string, Movie>? entry = collection[index];
@@ -82,7 +91,7 @@ namespace LibraryPlusAssignment
             }
             else
             {
-                HashEntry<string, Movie> movieCheck = collisionStrategy(hashIndex);
+                HashEntry<string, Movie> movieCheck = CollisionStrategy(hashIndex);
                 movieCheck.Next = movieEntry;
 
             }
@@ -179,7 +188,6 @@ namespace LibraryPlusAssignment
             int rightStart = mid + 1;
             int tempLength = finalIndex - initialIndex + 1;
             string[] temp = new string[tempLength];
-
             int leftStart = initialIndex;
 
             int tempIndex = 0;
@@ -189,6 +197,7 @@ namespace LibraryPlusAssignment
                 Movie? rightMovie = Search(A[rightStart]);
                 if (leftMovie.RentCount >= rightMovie.RentCount)
                 {
+                    BasicOperationCount++;
                     temp[tempIndex] = A[leftStart];
                     leftStart++;
                 }
@@ -225,6 +234,8 @@ namespace LibraryPlusAssignment
         public string[] SortByRentCount()
         {
             string[] movieNames = new string[movieCount];
+            //Testing
+            BasicOperationCount = 0;
             int j = 0;
             for (int i = 0; i < collection.Length; i++)
             {
@@ -237,7 +248,9 @@ namespace LibraryPlusAssignment
                 }
 
             }
+
             MergeSort(movieNames, 0, movieNames.Length - 1);
+            Console.WriteLine($"Sorted {movieCount} movies with {BasicOperationCount} comparisons.");
             return movieNames;
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -102,7 +103,11 @@ namespace LibraryPlusAssignment
 
         public void DisplayTopThree(MovieCollection movieCollection)
         {
+            //Stopwatch stopwatch = new Stopwatch();
+            //stopwatch.Start();
             string[] sortedMovies = movieCollection.SortByRentCount();
+            //stopwatch.Stop();
+            //Console.WriteLine("Time taken to sort: " + stopwatch.ElapsedMilliseconds + " ms");
             Console.WriteLine("Top Three Movies: ");
             for (int i = 0; i < 3; i++)
             {

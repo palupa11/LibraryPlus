@@ -28,5 +28,18 @@ namespace LibraryPlusAssignment
             RentCount = 0;
             
         }
+
+        public Movie(string title, string genre, string classification, string duration, int copies, int rentCount)
+        {
+            Title = title;
+            Genre = genre;
+            Classification = classification;
+            Duration = duration;
+            Copies = copies;
+            RentCount = rentCount;
+
+        }
+
+
     }
 }
