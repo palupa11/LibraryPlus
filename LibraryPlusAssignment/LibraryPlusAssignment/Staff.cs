@@ -27,37 +27,57 @@ namespace LibraryPlusAssignment
             Console.WriteLine("Add DVD to the system");
             Console.Write("Title: ");
             string? title = Console.ReadLine();
-            string genre;
+            string? genre;
             string[] validGenres = ["drama", "adventure", "family", "action", "sci-fi", "comedy", "animated", "thriller", "other"];
             while (true)
             {
                 Console.WriteLine("The Genres can be drama, adventure, family, action, sci-fi, comedy, animated, thriller, or other");
                 Console.Write("Genre: ");
-                genre = Console.ReadLine().ToLower();
-                if (validGenres.Contains(genre))
+                genre = Console.ReadLine();
+                if (!string.IsNullOrEmpty(genre))
                 {
-                    break;
+                    genre = genre.ToLower();
+                    if (validGenres.Contains(genre))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("Invalid genre. Please enter a valid genre: ");
+                    }
                 }
                 else
                 {
-                    Console.Write("Invalid genre. Please enter a valid genre: ");
+                    Console.WriteLine("Invalid or empty field. Please try again");
                 }
+
             }
             string[] validClassifications = ["G", "PG", "M", "MA", "R", "other"];
-            string classification;
+            string? classification;
             while (true)
             {
                 Console.WriteLine("The Classification can be G, PG, M, MA, R, or other");
                 Console.Write("Classification: ");
-                classification = Console.ReadLine().ToUpper();
-                if (validClassifications.Contains(classification))
+                classification = Console.ReadLine();
+                if (!string.IsNullOrEmpty(classification))
                 {
-                    break;
+                    classification = classification.ToUpper();
+                    if (validClassifications.Contains(classification))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("Invalid classification. Please enter a valid classification: ");
+                    }
+
                 }
                 else
                 {
-                    Console.Write("Invalid classification. Please enter a valid classification: ");
+                    Console.WriteLine("Invalid or empty field. Please try again");
                 }
+
+                
             }
 
             Console.Write("Duration: ");
@@ -73,19 +93,15 @@ namespace LibraryPlusAssignment
             MovieCollection movieCollection = MovieCollection.GetInstance();
 
             //Check if the movie already exists
-            // if (movieCollection.Search(movie.Title) != null)
-            // {
-            //     Console.WriteLine("Movie already exists");
-            //     var existingMovie = movieCollection.Search(movie.Title);
-            //     if (existingMovie != null)
-            //     {
-            //         existingMovie.Copies = copies;
-
-            //     }
-
-            //     Console.WriteLine("Copies updated");
-            //     return;
-            // }
+            Movie? movieExists = movieCollection.Search(movie.Title);
+            if (movieExists != null)
+            {
+                Console.WriteLine("Movie already exists");
+                
+                movieExists.Copies = copies;
+                Console.WriteLine("Copies updated");
+                return;
+            }
             if (movie != null)
             {
                 movieCollection.Insert(title, movie);
@@ -95,8 +111,8 @@ namespace LibraryPlusAssignment
             {
                 Console.WriteLine("Error! Movie not added");
             }
-            
-            
+
+
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
         }

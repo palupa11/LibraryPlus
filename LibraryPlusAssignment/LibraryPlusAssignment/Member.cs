@@ -90,14 +90,15 @@ namespace LibraryPlusAssignment
         }
         public void ListBorrowedMovies()
         {
-            Console.WriteLine("***List of Currently Borrowed movies***");
+            Console.WriteLine("List of Currently Borrowed movies");
+            Console.WriteLine("==========================================================");
             for (int i = 0; i < BorrowLimit; i++)
             {
                 if (rentedMovies[i] != "" || rentedMovies[i] != null)
                 {
-                    Console.WriteLine(rentedMovies[i]);
+                    Console.WriteLine((i+1) +" "+ rentedMovies[i]);
                 }
-                
+
             }
             Console.ReadKey();
 
