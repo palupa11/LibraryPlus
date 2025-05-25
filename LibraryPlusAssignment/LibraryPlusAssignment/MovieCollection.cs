@@ -15,7 +15,10 @@ namespace LibraryPlusAssignment
         public int Movietitle { get; set; }
         private int movieCount = 0;
         public const int COLLECTION_SIZE = 1000;
-        public int BasicOperationCount { get; set; }  
+
+        //Property for testing purposes only
+        //public int BasicOperationCount { get; set; }  
+
         //private Constructor to prevent instantiation from outside the class
         private MovieCollection()
         {
@@ -34,7 +37,6 @@ namespace LibraryPlusAssignment
         //Hashing algorithms starts here
         public int FoldingHashing(string title)
         {
-            //Console.WriteLine("Entering folding hash");
             int sum = 0;
             //If it is an odd number 
             if (title.Length % 2 != 0)
@@ -43,13 +45,9 @@ namespace LibraryPlusAssignment
             for (int i = 0; i < title.Length; i = i + 2)
             {
                 int firstLetter = (int)title[i];
-                //Console.WriteLine("1st letter: " + firstLetter);
                 int secondLetter = (int)title[i + 1];
-                //Console.WriteLine("2nd letter: "+ secondLetter);
                 string pairedLetters = Convert.ToString(firstLetter) + Convert.ToString(secondLetter);
-                //Console.WriteLine("Concatenated letters: " + pairedLetters);
                 int finalValue = Convert.ToInt32(pairedLetters);
-                //Console.WriteLine("final value: " + finalValue);
                 sum += finalValue;
 
             }
@@ -65,7 +63,9 @@ namespace LibraryPlusAssignment
         }
         public HashEntry<string, Movie> CollisionStrategy(int index)
         {
-            Console.WriteLine("Entering collision strategy");
+            /* this function is for handling when two hash entries
+            share the same index, using a separate chaining structure */
+            
             HashEntry<string, Movie>? entry = collection[index];
 
             HashEntry<string, Movie>? current = entry;
@@ -172,7 +172,6 @@ namespace LibraryPlusAssignment
             if (initialIndex < finalIndex)
             {
                 int midpoint = (initialIndex + finalIndex) / 2;
-                // Console.WriteLine("The midpoint is: " + midpoint);
                 MergeSort(A, initialIndex, midpoint);
                 MergeSort(A, midpoint + 1, finalIndex);
                 Merge(A, initialIndex, finalIndex, midpoint);
@@ -197,7 +196,7 @@ namespace LibraryPlusAssignment
                 Movie? rightMovie = Search(A[rightStart]);
                 if (leftMovie.RentCount >= rightMovie.RentCount)
                 {
-                    BasicOperationCount++;
+                    //BasicOperationCount++;
                     temp[tempIndex] = A[leftStart];
                     leftStart++;
                 }
@@ -221,8 +220,7 @@ namespace LibraryPlusAssignment
                 tempIndex++;
                 rightStart++;
             }
-            // Console.WriteLine("Left start at the end" + leftStart);
-            // Console.WriteLine("Temp array length" + tempLength);
+           
             for (int i = 0; i < tempLength; i++)
             {
                 A[initialIndex + i] = temp[i];
@@ -235,7 +233,7 @@ namespace LibraryPlusAssignment
         {
             string[] movieNames = new string[movieCount];
             //Testing
-            BasicOperationCount = 0;
+            //BasicOperationCount = 0;
             int j = 0;
             for (int i = 0; i < collection.Length; i++)
             {
@@ -250,7 +248,7 @@ namespace LibraryPlusAssignment
             }
 
             MergeSort(movieNames, 0, movieNames.Length - 1);
-            Console.WriteLine($"Sorted {movieCount} movies with {BasicOperationCount} comparisons.");
+            //Console.WriteLine($"Sorted {movieCount} movies with {BasicOperationCount} comparisons.");
             return movieNames;
         }
 

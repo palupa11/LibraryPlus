@@ -74,28 +74,31 @@ namespace LibraryPlusAssignment
                     BorrowedCount--;
                     MovieCollection movieCollection = MovieCollection.GetInstance();
                     Movie? movie = movieCollection.Search(movieTitle);
-                    movie.Copies++;
-                    Console.WriteLine("Movie returned successfully");
-                    Console.ReadKey();
+                    if (movie != null)
+                    {
+                        movie.Copies++;
+                        Console.WriteLine("Movie returned successfully. Enter any key to continue...");
+                        Console.ReadKey();
+                    }
+                    
                     return;
                 }
-
-
             }
-            Console.WriteLine("You are currently not renting that movie");
+            Console.WriteLine("You are currently not renting that movie. Enter any key to continue");
             Console.ReadKey();
 
         }
         public void ListBorrowedMovies()
         {
-            Console.WriteLine("***List of Currently Borrowed movies***");
+            Console.WriteLine("List of Currently Borrowed movies");
+            Console.WriteLine("==========================================================");
             for (int i = 0; i < BorrowLimit; i++)
             {
                 if (rentedMovies[i] != "" || rentedMovies[i] != null)
                 {
-                    Console.WriteLine(rentedMovies[i]);
+                    Console.WriteLine((i+1) +" "+ rentedMovies[i]);
                 }
-                
+
             }
             Console.ReadKey();
 
@@ -103,13 +106,20 @@ namespace LibraryPlusAssignment
 
         public void DisplayTopThree(MovieCollection movieCollection)
         {
-            //Stopwatch stopwatch = new Stopwatch();
-            //stopwatch.Start();
+            
             string[] sortedMovies = movieCollection.SortByRentCount();
-            //stopwatch.Stop();
-            //Console.WriteLine("Time taken to sort: " + stopwatch.ElapsedMilliseconds + " ms");
+            int count = 0; 
+            if (sortedMovies.Length > 3)
+            {
+                count = 3;
+            }
+            else
+            {
+                count = sortedMovies.Length;
+            }
+
             Console.WriteLine("Top Three Movies: ");
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < count; i++)
             {
                 Console.WriteLine(sortedMovies[i]);
             }
